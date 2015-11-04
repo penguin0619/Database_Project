@@ -1,11 +1,8 @@
-Database_TeamProject
+Database TeamProject
 
-Subject - Business project mangement system
+[Subject] Business project mangement system
 
-Myoung Ji University Computer Engineer Department
+Department of Computer Engineering University of MyoungJi 
 
 Database Design Lectured by Professor Jonghoon Chun 
 
--Member
- 
-60112339 jinyong Kim
