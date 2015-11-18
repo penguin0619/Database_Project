@@ -16,8 +16,7 @@ public class MemberVo {
     }
     public void setMember_No(Integer member_no) {
         this.member_no = member_no;
-    }
-    
+    }    
     public String getMember_id() {
         return member_id;
     }
@@ -60,5 +59,4 @@ public class MemberVo {
     public Integer getPersonal_id_end() {
         return personal_id_end;
     }
-    
 }

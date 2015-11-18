@@ -1,5 +1,4 @@
 package com.design.db;
-
 import java.util.List;
 import javax.annotation.Resource;
 
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.design.db.dao.*;
-
 
 @Controller(value = "viewController")
 public class ViewController {
@@ -44,9 +42,5 @@ public class ViewController {
 			memberVo.setMember_pos_code(3);
 			this.memberDao.insert(memberVo);
 			return "redirect:/";
-		}
-
-	
-	
-		
+		}		
 }
