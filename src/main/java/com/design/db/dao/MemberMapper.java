@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface MemberMapper {
     List<MemberVo> select();
     void insert(MemberVo memberVo);
+    MemberVo dupcheck(String member_id);
 }

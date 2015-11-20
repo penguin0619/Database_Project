@@ -14,7 +14,7 @@ public class MemberVo {
     public Integer getMember_no() {
         return member_no;  
     }
-    public void setMember_No(Integer member_no) {
+    public void setMember_no(Integer member_no) {
         this.member_no = member_no;
     }    
     public String getMember_id() {

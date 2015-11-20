@@ -17,6 +17,10 @@
         SELECT  * FROM member
     </select>
     
+    <select id="dupcheck" resultMap="memberMap">
+        SELECT  * FROM member WHERE member_id = #{member_id}
+    </select>
+    
     <insert id="insert">
          INSERT INTO member ( member_id, member_pos_code, member_name, member_degree,
           member_password,personal_id_front,personal_id_end ) VALUES (
@@ -29,7 +33,8 @@
               , #{personal_id_end}
          )
     </insert>
-
+    
+	
    
 
 </mapper>

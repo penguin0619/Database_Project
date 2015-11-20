@@ -7,18 +7,21 @@
     <title>스프링프레임워크 회원가입</title>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script src="<c:url value="/resources/js/signup_filter.js" />"></script>
+    <script src="<c:url value="/resources/js/signup_filter.js" />"></script>  
   </head>
   <body>
   <h1>회원가입페이지</h1>
   <form id="form" method="post" action="./signup_ok">
   <div>
   <span>회원 아이디</span>
-  <input type="text" id="member_id" name="member_id" value="${object.member_id}" />
+  <input type="text" id="member_id" name="member_id" value="${object.member_id}" onkeyup="dup_check()" />
+  <span id="duplicateResult"></span>
+  <input type="hidden" id="dup_ok" name="dup_ok" value="true"/>
   </div>
   <div>
   <span>회원이름</span>
   <input type="text" id="member_name" name="member_name" value="${object.member_name}" />
+  
   </div>
   <div>
   <span>최종학력</span>

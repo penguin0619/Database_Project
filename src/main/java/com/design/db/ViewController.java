@@ -1,18 +1,22 @@
 package com.design.db;
 import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.oxm.xstream.XStreamMarshaller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.design.db.dao.*;
+import com.thoughtworks.xstream.XStream;
 
 @Controller(value = "viewController")
 public class ViewController {
@@ -42,5 +46,53 @@ public class ViewController {
 			memberVo.setMember_pos_code(3);
 			this.memberDao.insert(memberVo);
 			return "redirect:/";
-		}		
+		}
+	
+	@Resource(name = "xstreamMarshaller")
+    private XStreamMarshaller xstreamMarshaller;
+
+    @Resource(name = "xmlView")
+    private View xmlView;
+
+	
+	@RequestMapping(value = "/DupCheck", method = RequestMethod.POST)
+	public View procDupCheck(@RequestParam(value = "member_id", required = true) String member_id, Model model) {
+		MemberVo object = this.memberDao.getDupcheck(member_id);
+		logger.info(member_id);
+		XStream xst = xstreamMarshaller.getXStream();
+		xst.alias("result", XmlResult.class);
+		XmlResult xml = new XmlResult();
+	   
+		if(object==null){
+			xml.setMessage("아이디가 중복되지 않습니다.");
+	    	xml.setError(false);			
+	    }else{
+	    	xml.setMessage("중복된 아이디가 있습니다.");
+	    	xml.setError(true);
+	    }
+	   
+	    model.addAttribute("xmlData", xml);
+	    return xmlView;
+	    
+	}
 }
+class XmlResult {
+
+    private String message;
+    private boolean error = false;
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    public String getMessage() {
+        return this.message;
+    }
+
+    public void setError(boolean error) {
+        this.error = error;
+    }
+    public boolean getError() {
+        return this.error;
+    }
+}
+

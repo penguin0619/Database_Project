@@ -8,6 +8,10 @@ public class MemberDao {
 	@Resource(name = "memberMapper")
 	private MemberMapper memberMapper;
 	
+	public MemberVo getDupcheck(String member_id){
+    	return this.memberMapper.dupcheck(member_id);
+    }
+	
 	public List<MemberVo> getSelect() {
         return this.memberMapper.select();
     }
@@ -15,6 +19,8 @@ public class MemberDao {
         this.memberMapper.insert(memberVo);
    }
     
+	
+	    
 }
 
 

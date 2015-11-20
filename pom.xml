@@ -161,7 +161,20 @@
 		    <groupId>org.lazyluke</groupId>
 		    <artifactId>log4jdbc-remix</artifactId>
 		    <version>0.2.7</version>
-		</dependency>        
+		</dependency>   
+		<!-- spring oxm -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-oxm</artifactId>
+    <version>3.1.1.RELEASE</version>
+</dependency>
+
+<!-- xstream core -->
+<dependency>
+    <groupId>com.thoughtworks.xstream</groupId>
+    <artifactId>xstream</artifactId>
+    <version>1.4.7</version>
+</dependency>     
 	</dependencies>
     <build>
         <plugins>

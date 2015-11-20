@@ -1,6 +1,8 @@
-function form_save(form) {
-        var is = filter([
+function form_save(form) {		
+		var is = filter([
         { target : '#member_id' , filter : 'empty' , title : '아이디' },
+        { target : '#member_id' , filter : 'id' , title : '아이디' },
+        { target : '#dup_ok' , filter : 'duplicate' , title : '아이디 중복여부' },
         { target : '#member_name' , filter : 'empty' , title : '이름' },
         { target : '#member_password' , filter : 'empty' , title : '패스워드' },
         { target : '#member_password' , filter : 'password' , title : '패스워드' },
@@ -11,7 +13,7 @@ function form_save(form) {
         { target : '#personal_id_front' , filter : 'personal_front' , title : '주민번호 앞자리' },
         { target : '#personal_id_end' , filter : 'personal_end' , title : '주민번호 뒷자리' },
         ]);
-
+        
         if (is == true) jQuery(form).submit();
     }
 
@@ -31,7 +33,23 @@ function form_save(form) {
                         is = false;
                     }
                 break;
-
+                case 'duplicate' :
+                    var val = jQuery(item.target).val();
+                    if(val == 'true'){
+                    	alert(item.title + '을(를) 체크하세요');
+                    	is = false;                    	
+                    }                       
+                              
+                break;
+                case 'id' :
+                    var val = jQuery(item.target).val();
+                    var chk_id = /^[a-z0-9_-]{3,16}$/;
+                    if(!chk_id.test(val)){
+                    	alert('적절한' + item.title + '을(를) 사용하세요.');
+                    	is = false;                    	
+                    }                       
+                              
+                break;
                 case 'number' :
                     var val = jQuery(item.target).val();
                     var num_regx = /[^0-9]/;
@@ -71,10 +89,26 @@ function form_save(form) {
                         is = false;                          
                     }           
                 break;
+                
              
             }            
             if(is == false) return is; //중복되는 유효성 검사 제거
         });
         return is;
     }
+    //아이디 중복여부 체크
+    function dup_check() {
+   	 var member_id = $("#member_id").val();
+   	jQuery.ajax({
+           type : 'POST' ,
+           url : './DupCheck' ,
+           data : 'member_id=' + member_id
+       }).done(function(data) {
+       	var message = jQuery(data).find("message").text();
+           var error = jQuery(data).find("error").text();
+           $("#duplicateResult").text(message);
+           $('#dup_ok').val(error);     
+           console.log($('#dup_ok').val());
+       });  
+   }
 
