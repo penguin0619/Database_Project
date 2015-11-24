@@ -1,6 +1,5 @@
 function form_save(form) {		
-		var skill_filter = new Array();
-		var counter = $('#skill_counter').val();
+		var is_ajax;		
 		var is = filter([
         { target : '#member_id' , filter : 'empty' , title : '아이디' },
         { target : '#member_id' , filter : 'id' , title : '아이디' },
@@ -8,6 +7,8 @@ function form_save(form) {
         { target : '#member_name' , filter : 'empty' , title : '이름' },
         { target : '#member_password' , filter : 'empty' , title : '패스워드' },
         { target : '#member_password' , filter : 'password' , title : '패스워드' },
+        { target : '#member_cellphone' , filter : 'empty' , title : '휴대폰' },
+        { target : '#member_cellphone' , filter : 'phone' , title : '휴대폰' },        
         { target : '#personal_id_front' , filter : 'empty' , title : '주민번호 앞자리' },
         { target : '#personal_id_end' , filter : 'empty' , title : '주민번호 뒷자리' },
         { target : '#personal_id_front' , filter : 'number' , title : '주민번호 앞자리' },
@@ -15,14 +16,13 @@ function form_save(form) {
         { target : '#personal_id_front' , filter : 'personal_front' , title : '주민번호 앞자리' },
         { target : '#personal_id_end' , filter : 'personal_end' , title : '주민번호 뒷자리' },
         ]);
+		is_ajax = ajax_filter();
 		
-		for(i=1; i<counter; i++ ){
-			skill_filter.push({target : '#skill' + i, filter : 'empty', title : '기술목록'});
+		
+		if ((is == true) && (is_ajax == true)){
+			$('#member_personal_id').val($('#personal_id_front').val() + $('#personal_id_end').val());
+			$(form).submit();
 		}
-		
-		
-		is = filter(skill_filter);		
-		if (is == true) $(form).submit();
     }
 
     // 입력 항목의 체크 함수
@@ -63,6 +63,15 @@ function form_save(form) {
                     var num_regx = /[^0-9]/;
                     if (num_regx.test(val)) {
                     alert(item.title + '을(를) 숫자만 입력하세요.');
+                    $(item.target).focus();
+                        is = false;
+                    }
+                break;
+                case 'phone' :
+                    var val = $(item.target).val();
+                    var num_regx = /^01([016789])-([1-9]{1})([0-9]{2,3})-([0-9]{4})$/; 
+                    if (!num_regx.test(val)) {
+                    alert(item.title + '정확히 입력하세요.');
                     $(item.target).focus();
                         is = false;
                     }
@@ -153,6 +162,23 @@ function form_save(form) {
         }
         return str;
     }
-  
+function ajax_filter(){
+	var arr_filter = new Array();
+	var skill_counter = $('#skill_counter').val();
+	var career_counter = $('#career_counter').val();
+	
+	var is = true;	
+	for(i=1; i<skill_counter; i++ ){
+		arr_filter.push({target : '#skill' + i, filter : 'empty', title : '기술목록 #' + i});
+	}
+	for(i=1; i<career_counter; i++){
+		arr_filter.push({target : '#before_company_name' + i, filter : 'empty', title : '회사명 #' + i});
+		arr_filter.push({target : '#position' + i, filter : 'empty', title : '직책 #' + i});
+		arr_filter.push({target : '#work_at_date' + i, filter : 'empty', title : '근무기간 #' + i});
+		arr_filter.push({target : '#work_end_date' + i, filter : 'empty', title : '근무기간 #' + i});
+	}
+	is = filter(arr_filter);	
+	return is;
+}  
    
 

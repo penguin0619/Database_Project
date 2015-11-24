@@ -42,8 +42,9 @@
   </div>
   <div>
   <span>주민번호</span>
-  <input type="text" id="personal_id_front" name="personal_id_front" maxlength="6" value="${memberVo.personal_id_front}" />
-  <input type="password" id="personal_id_end" name="personal_id_end" maxlength="7" value="${memberVo.personal_id_end}" />
+  <input type="text" id="personal_id_front" name="personal_id_front" maxlength="6" value="" />
+  <input type="password" id="personal_id_end" name="personal_id_end" maxlength="7" value="" />
+  <input type="hidden" id="member_personal_id" name="member_personal_id" value="${memberVo.member_personal_id}"/>
   </div>
   <div>
   <span>휴대번호</span>
@@ -64,7 +65,7 @@
   <input type='button' value='경력제거' id='remove_career'>
    <div id='career_set'></div>
    <input type="hidden" id="career_content" name="career_content" value=""/>
-   <input type="hidden" id="career_count" name="career_count" value=""/>
+   <input type="hidden" id="career_counter" name="career_counter" value=""/>
   </div>
  
 

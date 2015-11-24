@@ -24,18 +24,19 @@ $(document).ready(function(){
 				 
 	newcareer.after().html('<div><label>회사명 #'+ counter + ' : </label>' +
 	      '<input type="text" name="before_company_name' + counter + 
-	      '" id="before_company_name' + counter + '" value="" class="before_company_name"></div>'
+	      '" id="before_company_name' + counter + '" value=""></div>'
 	      +
 	       '<div><label>직책 #'+ counter + ' : </label>' +
 	      '<input type="text" name="position' + counter + 
-	      '" id="position' + counter + '" value="" class="position" ></div>' +
+	      '" id="position' + counter + '" value=""></div>' +
 	      '<div><label>근무기간 #'+ counter + ' : </label>' +
 	      '<input type="text" name="work_at_date' + counter + 
-	      '" id="work_at_date' + counter + '" class="datepicker" value="" class="work_at_date">'+
+	      '" id="work_at_date' + counter + '" class="datepicker" value="">'+
 	      '<span> ~ </span><input type="text" name="work_end_date' + counter + 
-	      '" id="work_end_date' + counter + '" class="datepicker" value="" class="work_end_date"></div>');            
+	      '" id="work_end_date' + counter + '" class="datepicker" value=""></div>');            
 	newcareer.appendTo("#career_set");				
 	counter++;
+	$('#career_counter').val(counter);
 	$('.datepicker').datepicker();
      });
 
@@ -49,7 +50,7 @@ $(document).ready(function(){
 			
         $("#career" + counter).remove();
         $("#career_div" + counter).remove();
-			
+        $('#career_counter').val(counter);
      });
 		
      $("#form").submit(function () {

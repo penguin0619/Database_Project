@@ -8,8 +8,7 @@ public class MemberVo {
     private String member_degree;
     private String member_password;
     private String member_cellphone;
-    private Integer personal_id_front;
-    private Integer personal_id_end;
+    private String member_personal_id;
     private String member_skillset;
     
     public Integer getMember_no() {
@@ -54,17 +53,11 @@ public class MemberVo {
     public void setMember_cellphone(String member_cellphone) {
         this.member_cellphone = member_cellphone;
     }
-    public void setPersonal_id_front(Integer personal_id_front) {
-        this.personal_id_front = personal_id_front;
+    public void setMember_personal_id(String member_personal_id) {
+        this.member_personal_id = member_personal_id;
     }
-    public Integer getPersonal_id_front(){
-    	return personal_id_front;    	
-    }
-    public void setPersonal_id_end(Integer personal_id_end) {
-        this.personal_id_end = personal_id_end;
-    }
-    public Integer getPersonal_id_end() {
-        return personal_id_end;
+    public String getMember_personal_id(){
+    	return this.member_personal_id;    	
     }
     public void setMember_skillset(String member_skillset) {
         this.member_skillset = member_skillset;

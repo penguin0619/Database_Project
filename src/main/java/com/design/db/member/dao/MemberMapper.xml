@@ -10,8 +10,7 @@
         <result property="member_degree"       column="mmber_degree" />
         <result property="member_password"       column="member_password" />
         <result property="member_cellphone"       column="member_cellphone" />
-        <result property="personal_id_front"       column="personal_id_front" />
-        <result property="personal_id_end"       column="personal_id_end" />
+        <result property="member_personal_id"       column="member_personal_id" />
         <result property="member_skillset"       column="member_skillset" />
                 
     </resultMap>
@@ -38,15 +37,14 @@
     	</selectKey>
          
          INSERT INTO member (member_id, member_pos_code, member_name, member_degree,
-          member_password,member_cellphone,personal_id_front,personal_id_end ) VALUES (
+          member_password,member_cellphone,member_personal_id ) VALUES (
                 #{member_id}
               , #{member_pos_code}
               , #{member_name}
               , #{member_degree}
               , #{member_password}
               , #{member_cellphone}
-              , #{personal_id_front}
-              , #{personal_id_end}
+              , #{member_personal_id}              
          )
        
     </insert>   
