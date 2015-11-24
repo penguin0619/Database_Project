@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.design.db.member.dao.MemberMapper">
+
+    <resultMap id="memberMap" type="com.design.db.member.dao.MemberVo">
+        <id property="member_no"    column="member_no" />
+        <result property="member_id" column="member_id" />
+        <result property="member_pos_code"       column="member_pos_code" />
+        <result property="member_name"       column="member_name" />
+        <result property="member_degree"       column="mmber_degree" />
+        <result property="member_password"       column="member_password" />
+        <result property="member_cellphone"       column="member_cellphone" />
+        <result property="personal_id_front"       column="personal_id_front" />
+        <result property="personal_id_end"       column="personal_id_end" />
+        <result property="member_skillset"       column="member_skillset" />
+                
+    </resultMap>
+    
+    <resultMap id="memberBeforeMap" type="com.design.db.member.dao.MemberBeforeVo">        
+        <id property="member_no"    column="member_no" />
+        <result property="before_company_name" column="before_company_name" />
+        <result property="position"       column="position" />
+        <result property="work_at_date"       column="work_at_date" />
+        <result property="work_end_date"       column="work_end_date" />                       
+    </resultMap>
+
+    <select id="select" resultMap="memberMap">
+        SELECT  * FROM member
+    </select>
+    
+    <select id="dupcheck" resultMap="memberMap">
+        SELECT  * FROM member WHERE member_id = #{member_id}
+    </select>
+    
+    <insert id="insert" useGeneratedKeys="true" parameterType="com.design.db.member.dao.MemberVo" >
+        <selectKey keyProperty="member_no" resultType="int" order="AFTER">
+        	SELECT last_insert_id()
+    	</selectKey>
+         
+         INSERT INTO member (member_id, member_pos_code, member_name, member_degree,
+          member_password,member_cellphone,personal_id_front,personal_id_end ) VALUES (
+                #{member_id}
+              , #{member_pos_code}
+              , #{member_name}
+              , #{member_degree}
+              , #{member_password}
+              , #{member_cellphone}
+              , #{personal_id_front}
+              , #{personal_id_end}
+         )
+       
+    </insert>   
+	   
+	<insert id="insert_skillset">
+	INSERT INTO member_skillset (member_no, member_skillset) VALUES (
+                #{member_no}
+              , #{member_skillset}
+         )
+	</insert>
+    
+    <insert id="insert_career">
+	INSERT INTO member_career VALUES (
+                #{member_no}
+              , #{before_company_name}
+              , #{work_at_date}
+              , #{work_end_date}
+              , #{position}
+         )
+	</insert> 
+
+</mapper>

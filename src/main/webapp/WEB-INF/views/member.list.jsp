@@ -20,6 +20,7 @@
       <th scope="col">Member_Name</th>
       <th scope="col">Member_Degree</th>      
       <th scope="col">Memeber_Password</th>
+      <th scope="col">Memeber_Cellphone</th>
       <th scope="col">Personal_ID_Front</th>
       <th scope="col">Personal_ID_End</th>
     </tr>
@@ -35,6 +36,7 @@
       <td>${item.member_name}</td>
       <td>${item.member_degree}</td>
       <td>${item.member_password}</td>
+      <td>${item.member_cellphone}</td>
       <td>${item.personal_id_front}</td>
       <td>${item.personal_id_end}</td>
     </tr>

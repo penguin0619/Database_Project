@@ -1,4 +1,4 @@
-package com.design.db.dao;
+package com.design.db.member.dao;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -18,8 +18,12 @@ public class MemberDao {
     public void insert(MemberVo memberVo) {
         this.memberMapper.insert(memberVo);
    }
-    
-	
+    public void insert_skillset(MemberVo memberVo){
+    	this.memberMapper.insert_skillset(memberVo);
+    }
+    public void insert_career(MemberBeforeVo memberBeforeVo){
+    	this.memberMapper.insert_career(memberBeforeVo);
+    }
 	    
 }
 

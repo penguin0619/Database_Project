@@ -1,4 +1,4 @@
-package com.design.db.dao;
+package com.design.db.member.dao;
 
 public class MemberVo {
     private Integer member_no;
@@ -7,10 +7,11 @@ public class MemberVo {
     private String member_name;
     private String member_degree;
     private String member_password;
+    private String member_cellphone;
     private Integer personal_id_front;
     private Integer personal_id_end;
+    private String member_skillset;
     
-
     public Integer getMember_no() {
         return member_no;  
     }
@@ -47,6 +48,12 @@ public class MemberVo {
     public String getMember_password() {
         return member_password;
     }
+    public String getMember_cellphone() {
+        return member_cellphone;
+    }
+    public void setMember_cellphone(String member_cellphone) {
+        this.member_cellphone = member_cellphone;
+    }
     public void setPersonal_id_front(Integer personal_id_front) {
         this.personal_id_front = personal_id_front;
     }
@@ -58,5 +65,13 @@ public class MemberVo {
     }
     public Integer getPersonal_id_end() {
         return personal_id_end;
+    }
+    public void setMember_skillset(String member_skillset) {
+        this.member_skillset = member_skillset;
+    }
+    public String getMember_skillset() {
+    	if(this.member_skillset.equals(""))
+    		return null;
+    	return member_skillset;
     }
 }

@@ -1,4 +1,4 @@
-package com.design.db;
+package com.design.db.member;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.design.db.dao.*;
+import com.design.db.member.dao.*;
 import com.thoughtworks.xstream.XStream;
 
 @Controller(value = "viewController")
@@ -41,10 +41,23 @@ public class ViewController {
         return "member.signup";
     }
 	@RequestMapping(value = "/signup_ok", method = RequestMethod.POST)
-		public String procMemberSignup(@ModelAttribute("memberVo") MemberVo memberVo, RedirectAttributes redirectAttributes) {
-			logger.info("Process... Member Signup!");
+		public String procMemberSignup(@ModelAttribute("memberVo") MemberVo memberVo,
+				@ModelAttribute("memberBeforeVo") MemberBeforeVo memberBeforeVo,
+				RedirectAttributes redirectAttributes,
+				@RequestParam(value = "career_content", required = true) String career_content){
+			
 			memberVo.setMember_pos_code(3);
 			this.memberDao.insert(memberVo);
+			this.memberDao.insert_skillset(memberVo);
+			
+			if(career_content !=""){
+			String [] career = career_content.split("\n");
+				memberBeforeVo.setMember_no(memberVo.getMember_no());
+				for(String cr : career){
+					memberBeforeVo.setsplit(cr);
+					this.memberDao.insert_career(memberBeforeVo);
+				}
+			}
 			return "redirect:/";
 		}
 	
