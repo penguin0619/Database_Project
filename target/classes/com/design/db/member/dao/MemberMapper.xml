@@ -31,6 +31,23 @@
         SELECT  * FROM member WHERE member_id = #{member_id}
     </select>
     
+    <select id="select_id" resultMap="memberMap">
+        SELECT  * FROM member WHERE member_id = #{member_id}
+    </select>
+    
+    <select id="select_no" resultMap="memberMap">
+        SELECT  * FROM member INNER JOIN positions
+        ON member.member_pos_code = positions.position_code
+        NATURAL JOIN member_skillset
+        WHERE member_no = #{member_no}
+    </select>
+    
+    <select id="select_career" resultMap="memberBeforeMap">
+        SELECT  * FROM member_career
+        WHERE member_no = #{member_no}
+    </select>
+    
+    
     <insert id="insert" useGeneratedKeys="true" parameterType="com.design.db.member.dao.MemberVo" >
         <selectKey keyProperty="member_no" resultType="int" order="AFTER">
         	SELECT last_insert_id()

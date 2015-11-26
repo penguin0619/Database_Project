@@ -11,4 +11,7 @@ public interface MemberMapper {
     void insert_skillset(MemberVo memberVo);
     MemberVo dupcheck(String member_id);
     void insert_career(MemberBeforeVo memberBeforeVo);
+    MemberVo select_id(String member_id);
+    MemberVo select_no(Integer member_no);
+    List<MemberBeforeVo> select_career(Integer member_no);
 }

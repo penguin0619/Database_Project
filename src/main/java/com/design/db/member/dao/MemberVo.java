@@ -10,7 +10,7 @@ public class MemberVo {
     private String member_cellphone;
     private String member_personal_id;
     private String member_skillset;
-    
+    private String position_type;
     public Integer getMember_no() {
         return member_no;  
     }
@@ -59,12 +59,18 @@ public class MemberVo {
     public String getMember_personal_id(){
     	return this.member_personal_id;    	
     }
+    public void setPosition_type(String position_type) {
+        this.position_type = position_type;
+    }
+    public String getPosition_type(){
+    	return this.position_type;    	
+    }
     public void setMember_skillset(String member_skillset) {
         this.member_skillset = member_skillset;
     }
     public String getMember_skillset() {
-    	if(this.member_skillset.equals(""))
-    		return null;
+    	if(member_skillset.equals(""))
+    		return "입력하지 않음";
     	return member_skillset;
     }
 }

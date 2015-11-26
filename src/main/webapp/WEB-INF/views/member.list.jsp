@@ -11,10 +11,28 @@
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
+<<<<<<< HEAD
 </head>
+=======
+    <tbody>
+    <!-- 목록이 반복될 영역 -->
+    <c:forEach var="item" items="${list}" varStatus="status">
+    <tr onclick="location.href='./member.view?no=${item.member_no}'">
+      <td>${item.member_no}</td>
+      <td>${item.member_id}</td>
+      <td>${item.member_pos_code}</td>
+      <td>${item.member_name}</td>
+      <td>${item.member_degree}</td>
+      <td>${item.member_password}</td>
+      <td>${item.member_cellphone}</td>
+      <td>${item.member_personal_id}</td>
+    </tr>
+    </c:forEach>
+>>>>>>> master
 
 <body>
 
+<<<<<<< HEAD
 
 	<h1></h1>
 	<table border="1">
@@ -59,4 +77,9 @@
 		<a href="./signup">회원가입</a>
 	</div>
 </body>
+=======
+  </table>
+  <div><a href="./mypage">마이페이지</a></div>
+  </body>
+>>>>>>> master
 </html>

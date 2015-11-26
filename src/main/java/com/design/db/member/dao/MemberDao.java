@@ -24,6 +24,15 @@ public class MemberDao {
     public void insert_career(MemberBeforeVo memberBeforeVo){
     	this.memberMapper.insert_career(memberBeforeVo);
     }
+    public MemberVo selectid(String member_id){
+    	return this.memberMapper.select_id(member_id);
+    }
+    public MemberVo selectno(Integer member_no){
+    	return this.memberMapper.select_no(member_no);
+    }
+    public List<MemberBeforeVo>select_career(Integer member_no){
+    	return this.memberMapper.select_career(member_no);
+    }
 	    
 }
 
