@@ -28,7 +28,7 @@
     <tbody>
     <!-- 목록이 반복될 영역 -->
     <c:forEach var="item" items="${list}" varStatus="status">
-    <tr>
+    <tr onclick="location.href='./member.view?no=${item.member_no}'">
       <td>${item.member_no}</td>
       <td>${item.member_id}</td>
       <td>${item.member_pos_code}</td>
@@ -43,6 +43,6 @@
     </tbody>
 
   </table>
-  <div><a href="./signup">회원가입</a></div>
+  <div><a href="./mypage">마이페이지</a></div>
   </body>
 </html>

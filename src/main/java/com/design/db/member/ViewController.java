@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.oxm.xstream.XStreamMarshaller;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,8 +25,9 @@ public class ViewController {
 	
 	@Resource(name = "memberDao")
 	    private MemberDao memberDao;
-	 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')") 
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	    public String dispMemberList(Model model) {
 	        logger.info("display view Member list");
 	        List<MemberVo> list = this.memberDao.getSelect();
@@ -34,12 +36,28 @@ public class ViewController {
 	        logger.info("total count" + list.size() );
 
 	        return "member.list";
-	    } 
+	    }
+	@RequestMapping("/member.view")
+    public String dispMemberView(@RequestParam(value="no", defaultValue="0") int member_no, Model model) {
+        MemberVo member = this.memberDao.selectno(member_no);
+        List<MemberBeforeVo> career = this.memberDao.select_career(member_no);
+        
+        if(member.getMember_skillset() == null){
+        	member.setMember_skillset("¾øÀ½");
+        }
+        model.addAttribute("career", career);
+        model.addAttribute("member", member);
+        System.out.println(career.size());
+        return "member.view";
+    }
+	
+	
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String dispMemberSignup() {
         logger.info("display view Member Signup");
         return "member.signup";
     }
+	
 	@RequestMapping(value = "/signup_ok", method = RequestMethod.POST)
 		public String procMemberSignup(@ModelAttribute("memberVo") MemberVo memberVo,
 				@ModelAttribute("memberBeforeVo") MemberBeforeVo memberBeforeVo,
@@ -58,7 +76,7 @@ public class ViewController {
 					this.memberDao.insert_career(memberBeforeVo);
 				}
 			}
-			return "redirect:/";
+			return "redirect:/mypage";
 		}
 	
 	@Resource(name = "xstreamMarshaller")

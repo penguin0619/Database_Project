@@ -15,7 +15,7 @@ $(document).ready(function(){
     $("#add_career").click(function () {
 				
 	if(counter>10){
-            alert("최대 10개까지 기술 작성이 가능합니다.");
+            alert("최대 10개까지 경력 작성이 가능합니다.");
             return false;
 	}
 		
