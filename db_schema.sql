@@ -43,7 +43,7 @@ CREATE TABLE message
 CREATE TABLE member_skillset
 (
 	member_no             INTEGER  NOT NULL,	
-member_skillset          VARCHAR(255)  NULL ,
+	member_skillset          VARCHAR(255) NOT NULL ,
 	 
     FOREIGN KEY (member_no) REFERENCES member(member_no)
 );
