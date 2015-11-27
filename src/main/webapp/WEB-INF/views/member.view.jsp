@@ -6,8 +6,27 @@
   <head>
     <meta charset="utf-8">
     <title>스프링프레임워크 게시판</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    
+    
   </head>
   <body>
+  
+  	<!-- 상단 네비게이션 바 -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+             
+          <a class="navbar-brand" href="#">프람트소프트웨어</a>
+        </div>
+        </div>
+</div>
+  
+   <div class="container" >
+      <div style="margin-top: 100px;">
   <ul style="list-style-type:circle">
   <li>사원명 : ${member.member_name}</li>
   <li>직책 : ${member.position_type}</li>
@@ -32,5 +51,8 @@
   </ul>
   </c:forEach> 
 </ul>
+
+</div>
+</div>
   </body>
 </html>

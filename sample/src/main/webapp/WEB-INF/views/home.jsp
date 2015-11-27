@@ -9,8 +9,9 @@
 	<title>Document</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	
 </head>
 <body>
 	<!-- 상단 네비게이션 바 -->
@@ -38,7 +39,8 @@
         </div>
       </div>
 </div>
-<div class="container">
+
+<div class="container" >
       <div style="margin-top: 100px;">
         
          <form class="form-signin">

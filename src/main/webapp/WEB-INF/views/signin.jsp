@@ -8,14 +8,15 @@
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <meta name="viewport" content="width=device-width, initial-scale=1">
      <title>Spring security</title>
-
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
      <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
      <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-     </head>
-
-     <body>
-
-     <script>
+     
+     
+     
+        <script>
 
      function get_msg(message) {
           var move = '70px';
@@ -59,20 +60,43 @@
 
      }
      </script>
+     
 
+     </head>
+
+<body>
+
+	<!-- 상단 네비게이션 바 -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+      
+        <div class="navbar-header">
+             
+          <a class="navbar-brand" href="#">프람트소프트웨어</a>
+        </div>
+        </div>
+
+
+
+<div class="container" >
+     <div style="margin-top: 100px;">
      <div>
      <div id="message" style="width:300px;position:absolute; top:-60px;border: 1px;border-color: #000;"></div>
      </div>
 
-     <div style="margin-top:100px;">
-     <form id="form" action="./j_spring_security_check" method="post">
-     아이디 : <input type="text" id="user_id" name="user_id">
-     비밀번호 : <input type="password" id="password" name="password">
-     <button type="button" onclick="signin();">로그인</button>
-     <button type="button" onclick = "location.href='./signup'">회원가입</button>
+
+     
+     <form class = "form-sigin" id="form" action="./j_spring_security_check" method="post">
+      <h2 class="form-signin-heading">시스템에 접속하시려면 로그인 해주세요.</h2>
+      <label for="user_id" class="sr-only">User ID</label>
+      <input type="text" id="user_id" class = "form-control" placeholder = "User ID" name="user_id">
+      <label for="password" class="sr-only">Password</label>
+      <input type="password" id="password" class = "form-control" placeholder = "Password" name="password">
+     <button class="btn btn-lg btn-primary btn-block"  type="button" onclick="signin();">로그인</button>
+     <button class="btn btn-lg btn-primary btn-block"  type="button" onclick = "location.href='./signup'">회원가입</button>
      </form>
 
      </div>
+</div>
 
      </body>
 
