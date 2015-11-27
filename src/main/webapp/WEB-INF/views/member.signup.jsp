@@ -100,14 +100,13 @@
 			  <div class = "form-group">
 			  <label for="skillset" class="col-sm-2 control-label">기술목록</label> 
 			   <button type="button" id='add_skill' class="btn btn-sm btn-primary">목록추가</button>
-			   <!-- <input type='button' value='목록추가' id='add_skill'> -->
 			   <button type="button" id='remove_skill' class="btn btn-sm btn-primary">목록제거</button>
 			  
-			  <div id='skill_set' class = "form-group">
+			  <div id='skill_set' class = "form-group"   style="margin-top: 10px;">
 			  <div>
 			  
-			  <input type="hidden" id="member_skillset" name="member_skillset" value="${memberVo.member_skillset}"/>
-			  <input type="hidden" id="skill_counter" name="skill_counter" value=""/>
+			  <input type="hidden" class = "form-group" id="member_skillset" name="member_skillset" value="${memberVo.member_skillset}"/>
+			  <input type="hidden" class = "form-group"  id="skill_counter" name="skill_counter" value=""/>
 			  </div>
 			  </div>
 			  </div>
@@ -117,14 +116,15 @@
 			  <label for="career" class="col-sm-2 control-label">이전 경력</label> 
 			   <button type="button" id='add_career' class="btn btn-sm btn-primary">경력추가</button>
 			    <button type="button" id='remove_career' class="btn btn-sm btn-primary">경력제거</button>
-			  
-			   <div id='career_set'></div>
+			
+			   <div id='career_set' style="margin-top: 10px;"></div>
 			   <input type="hidden" id="career_content" name="career_content" value=""/>
 			   <input type="hidden" id="career_counter" name="career_counter" value=""/>
 			  </div>
+		
 			 
-			
-			  <div>
+			 <div class="col-sm-6">
+			  
 			  <button class="btn btn-lg btn-primary btn-block" id="save" type="button" onclick="form_save('#form');">회원가입</button>
 			 
 			  </div>

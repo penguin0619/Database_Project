@@ -31,10 +31,11 @@
 
 
  <div class="container">
-
+<div style="margin-top: 100px;">
      <h1>${user_name} 로그인 중</h1>
 	 <a href="./list">회원목록</a>
 	 <a href="./signout">로그아웃</a>
+</div>
 </div>
      </body>
 

@@ -83,25 +83,27 @@
 
 <div class = "container" style="margin-top: 100px;">
 
-  
      
 <div class ="alert-danger"  role = "alert">
 	<div id="message" style="width:300px;position:absolute; top:22px; border: 1px;border-color: #000;"></div>
      
 </div>
-
+<h2 class="form-signin-heading">시스템에 접속하시려면 로그인 해주세요.</h2>
+<div class="col-sm-6">
      
      <form class = "form-sigin" id="form" action="./j_spring_security_check" method="post">
-      <h2 class="form-signin-heading">시스템에 접속하시려면 로그인 해주세요.</h2>
-      <label for="user_id" class="sr-only">User ID</label>
+      
+      <label for="user_id" class="sr-only" style="margin-top: 100px;" >User ID</label>
       <input type="text" id="user_id" class = "form-control" placeholder = "User ID" name="user_id">
-      <label for="password" class="sr-only">Password</label>
+      <label for="password" class="sr-only" >Password</label>
       <input type="password" id="password" class = "form-control" placeholder = "Password" name="password">
-     <button class="btn btn-lg btn-primary btn-block"  type="button" onclick="signin();">로그인</button>
-     <button class="btn btn-lg btn-primary btn-block"  type="button" onclick = "location.href='./signup'">회원가입</button>
+     <button class="btn btn-lg btn-primary btn-block"  type="button" onclick="signin();" style="margin-top: 20px;">로그인</button>
+     <button class="btn btn-lg btn-primary btn-block"  type="button" onclick = "location.href='./signup'" style="margin-top: 10px;">회원가입</button>
      </form>
 
      </div>
+     </div>
+
    
      
 

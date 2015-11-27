@@ -11,10 +11,9 @@ $(document).ready(function(){
 		
 	var newskill = $(document.createElement('div'))
 	     .attr("id", 'skill_div' + counter);
-                
-	newskill.after().html('<label>기술목록 #'+ counter + ' : </label>' +
-	      '<input type="text" name="skill' + counter + 
-	      '" id="skill' + counter + '" value="">');
+	newskill.attr("class", "form-group");
+	newskill.after().html('<label class="col-sm-2 control-label">기술목록 #'+ counter + ' : </label>' +
+	      '<input type="text" name="skill' + counter +  '" id="skill' + counter + '" value="">');
             
 	newskill.appendTo("#skill_set");
 

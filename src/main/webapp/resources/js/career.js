@@ -21,15 +21,15 @@ $(document).ready(function(){
 		
 	var newcareer = $(document.createElement('div'))
 	     .attr("id", 'career_div' + counter);
-				 
-	newcareer.after().html('<div><label>회사명 #'+ counter + ' : </label>' +
+	 
+	newcareer.after().html('<div class = "form-group"><label class="col-sm-2 control-label">회사명 #'+ counter + ' : </label>' +
 	      '<input type="text" name="before_company_name' + counter + 
 	      '" id="before_company_name' + counter + '" value=""></div>'
 	      +
-	       '<div><label>직책 #'+ counter + ' : </label>' +
+	       '<div class = "form-group"><label class="col-sm-2 control-label">직책 #'+ counter + ' : </label>' +
 	      '<input type="text" name="position' + counter + 
 	      '" id="position' + counter + '" value=""></div>' +
-	      '<div><label>근무기간 #'+ counter + ' : </label>' +
+	      '<div class = "form-group"><label class="col-sm-2 control-label">근무기간 #'+ counter + ' : </label>' +
 	      '<input type="text" name="work_at_date' + counter + 
 	      '" id="work_at_date' + counter + '" class="datepicker" value="">'+
 	      '<span> ~ </span><input type="text" name="work_end_date' + counter + 
