@@ -17,13 +17,13 @@
   
   	<!-- 상단 네비게이션 바 -->
 <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
+
         <div class="navbar-header">
              
           <a class="navbar-brand" href="#">프람트소프트웨어</a>
         </div>
         </div>
-</div>
+
   
    <div class="container" >
       <div style="margin-top: 100px;">

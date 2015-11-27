@@ -15,7 +15,8 @@
      <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
      
      
-     
+
+    
         <script>
 
      function get_msg(message) {
@@ -60,13 +61,17 @@
 
      }
      </script>
-     
+ 
 
      </head>
 
 <body>
 
-	<!-- 상단 네비게이션 바 -->
+
+     
+
+ 
+
 <div class="navbar navbar-inverse navbar-fixed-top">
       
         <div class="navbar-header">
@@ -76,13 +81,14 @@
         </div>
 
 
+<div class = "container" style="margin-top: 100px;">
 
-<div class="container" >
-     <div style="margin-top: 100px;">
-     <div>
-     <div id="message" style="width:300px;position:absolute; top:-60px;border: 1px;border-color: #000;"></div>
-     </div>
-
+  
+     
+<div class ="alert-danger"  role = "alert">
+	<div id="message" style="width:300px;position:absolute; top:22px; border: 1px;border-color: #000;"></div>
+     
+</div>
 
      
      <form class = "form-sigin" id="form" action="./j_spring_security_check" method="post">
@@ -96,7 +102,9 @@
      </form>
 
      </div>
-</div>
+   
+     
+
 
      </body>
 
