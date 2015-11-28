@@ -53,26 +53,6 @@
 </ul>
 </div>
 </div>
-  <c:if test="${count > 0}">
-   <c:set var="pageCount" value="${count / pageSize + ( count % pageSize == 0 ? 0 : 1)}"/>
-   <c:set var="startPage" value="${pageGroupSize*(numPageGroup-1)+1}"/>
-   <c:set var="endPage" value="${startPage + pageGroupSize-1}"/>
-   <c:if test="${endPage > pageCount}" >
-     <c:set var="endPage" value="${pageCount}" />
-   </c:if>          
-   <c:if test="${numPageGroup > 1}">
-        <a href="./request_project_list?pageNum=${(numPageGroup-2)*pageGroupSize+1 }">[이전]</a>
-   </c:if>
-   <c:forEach var="i" begin="${startPage}" end="${endPage}">
-       <a href="./request_project_list?pageNum=${i}">  
-          <c:if test="${currentPage == i}">          
-        </c:if>
-        [ ${i} ]
-       </a>
-   </c:forEach>
-   <c:if test="${numPageGroup < pageGroupCount}">
-        <a href="./request_project_list?pageNum=${numPageGroup*pageGroupSize+1}">[다음]</a>
-   </c:if>
-</c:if>
+
   </body>
 </html>
