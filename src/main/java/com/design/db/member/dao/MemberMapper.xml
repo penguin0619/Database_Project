@@ -41,12 +41,38 @@
         NATURAL JOIN member_skillset
         WHERE member_no = #{member_no}
     </select>
+    <select id="select_what_position" resultType="String" parameterType="String">
+    	SELECT member_pos_code FROM member
+    	WHERE member_id = #{user_id}
+    
+    </select>
+  
     
     <select id="select_career" resultMap="memberBeforeMap">
         SELECT  * FROM member_career
         WHERE member_no = #{member_no}
     </select>
     
+    <select id="select_count_positions" resultType="String" parameterType="String">
+    	SELECT COUNT(*) FROM member 
+    	WHERE member_pos_code = #{member_pos_code} 
+    </select>
+    
+    <select id="select_user_no" resultType="String" parameterType="String" >
+        SELECT member_no FROM member WHERE member_id = #{user_id}
+    </select>
+    
+    <select id="select_user_name" resultType="String" parameterType="String" >
+        SELECT member_name FROM member WHERE member_no = #{member_no}
+    </select>
+    
+    <select id ="select_member_board" resultMap="memberMap" parameterType="java.util.Map">
+    	SELECT * FROM member ORDER BY member_name DESC LIMIT #{offset1}, #{offset2}
+    </select>
+    
+    <select id ="select_count_member" resultType="int">
+    	SELECT COUNT(*) FROM member;
+    </select>
     
     <insert id="insert" useGeneratedKeys="true" parameterType="com.design.db.member.dao.MemberVo" >
         <selectKey keyProperty="member_no" resultType="int" order="AFTER">

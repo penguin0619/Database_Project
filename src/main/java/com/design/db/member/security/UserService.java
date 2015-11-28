@@ -29,16 +29,18 @@ public class UserService implements UserDetailsService {
         logger.info("username : " + username);
         MemberVo memberVo = memberDao.selectid(username);
         // 회원 정보 dao 에서 데이터를 읽어 옴.
-        
+        System.out.println("sdfsdf");
         //암호화 생략? 할까 말까.... 
         String password = memberVo.getMember_password();
-        
+       
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
 
         Role role = new Role();
-        role.setName("ROLE_ADMIN");
+        if(memberVo.getMember_pos_code() == 0){
+        	role.setName("ROLE_EXECUTIVE");
+        }
 
         List<Role> roles = new ArrayList<Role>();
         roles.add(role);

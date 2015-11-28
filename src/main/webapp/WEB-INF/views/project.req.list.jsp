@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -14,34 +16,31 @@
   </colgroup>
   <thead>
     <tr>
-      <th scope="col">Member_No</th>
-      <th scope="col">Member_ID</th>
-      <th scope="col">Member_Pos_Code</th>
-      <th scope="col">Member_Name</th>
-      <th scope="col">Member_Degree</th>      
-      <th scope="col">Memeber_Password</th>
-      <th scope="col">Memeber_Cellphone</th>
-      <th scope="col">Member_Personal_ID</th>
+      <th scope="col">요청번호</th>
+      <th scope="col">프로젝트이름</th>
+      <th scope="col">회사명</th>
+      <th scope="col">요청날짜</th>
+      <th scope="col">상태</th>
     </tr>
     </thead>
-
+	
     <tbody>
     <!-- 목록이 반복될 영역 -->
     <c:forEach var="item" items="${list}" varStatus="status">
-    <tr onclick="location.href='./member.view?no=${item.member_no}'">
-      <td>${item.member_no}</td>
-      <td>${item.member_id}</td>
-      <td>${item.member_pos_code}</td>
-      <td>${item.member_name}</td>
-      <td>${item.member_degree}</td>
-      <td>${item.member_password}</td>
-      <td>${item.member_cellphone}</td>
-      <td>${item.member_personal_id}</td>
+    <tr onclick="location.href='./request_project_view?no=${item.project_request_no}'">
+      <td>${item.project_request_no}</td>
+      <td>${item.project_name}</td>
+      <td>${item.project_company_name}</td>
+      <td>${item.project_register_date}</td>
+      <td>${item.project_status}</td>
     </tr>
     </c:forEach>
     </tbody>
   </table>
-    <c:if test="${count > 0}">
+  
+  
+  
+  <c:if test="${count > 0}">
    <c:set var="pageCount" value="${count / pageSize + ( count % pageSize == 0 ? 0 : 1)}"/>
    <c:set var="startPage" value="${pageGroupSize*(numPageGroup-1)+1}"/>
    <c:set var="endPage" value="${startPage + pageGroupSize-1}"/>
@@ -49,17 +48,17 @@
      <c:set var="endPage" value="${pageCount}" />
    </c:if>          
    <c:if test="${numPageGroup > 1}">
-        <a href="./list?pageNum=${(numPageGroup-2)*pageGroupSize+1 }">[이전]</a>
+        <a href="./request_project_list?pageNum=${(numPageGroup-2)*pageGroupSize+1 }">[이전]</a>
    </c:if>
    <c:forEach var="i" begin="${startPage}" end="${endPage}">
-       <a href="./list?pageNum=${i}">  
+       <a href="./request_project_list?pageNum=${i}">  
           <c:if test="${currentPage == i}">          
         </c:if>
         [ ${i} ]
        </a>
    </c:forEach>
    <c:if test="${numPageGroup < pageGroupCount}">
-        <a href="./list?pageNum=${numPageGroup*pageGroupSize+1}">[다음]</a>
+        <a href="./request_project_list?pageNum=${numPageGroup*pageGroupSize+1}">[다음]</a>
    </c:if>
 </c:if>
   <div><a href="./mypage">마이페이지</a></div>

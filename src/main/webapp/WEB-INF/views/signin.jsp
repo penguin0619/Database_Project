@@ -99,6 +99,7 @@
       <input type="password" id="password" class = "form-control" placeholder = "Password" name="password">
      <button class="btn btn-lg btn-primary btn-block"  type="button" onclick="signin();" style="margin-top: 20px;">로그인</button>
      <button class="btn btn-lg btn-primary btn-block"  type="button" onclick = "location.href='./signup'" style="margin-top: 10px;">회원가입</button>
+     <button class="btn btn-lg btn-primary btn-block"  type="button" onclick = "location.href='./request_project'">프로젝트요청</button>
      </form>
 
      </div>

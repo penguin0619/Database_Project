@@ -34,6 +34,8 @@
 <div style="margin-top: 100px;">
      <h1>${user_name} 로그인 중</h1>
 	 <a href="./list">회원목록</a>
+	 <a href="./request_project_list">요청목록</a>
+	 <a href="./request_project_list">결재요청</a>
 	 <a href="./signout">로그아웃</a>
 </div>
 </div>

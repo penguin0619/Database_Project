@@ -1,6 +1,8 @@
 package com.design.db.member.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 
@@ -14,4 +16,10 @@ public interface MemberMapper {
     MemberVo select_id(String member_id);
     MemberVo select_no(Integer member_no);
     List<MemberBeforeVo> select_career(Integer member_no);
+    String select_count_positions(String member_pos_code);
+    String select_user_no(String user_id);
+    String select_what_position(String user_id);
+    String select_user_name(String member_no);
+    int select_count_member();
+    List<MemberVo> select_member_board(Map<String,Integer> map);
 }
