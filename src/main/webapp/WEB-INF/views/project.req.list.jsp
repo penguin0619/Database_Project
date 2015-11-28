@@ -6,20 +6,20 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" >
     <title>스프링프레임워크 게시판</title>
   </head>
   <body>
   <h1></h1>
-  <table border="1">
-    <colgroup>
-  <col width="60"><col><col width="115"><col width="85">
-  </colgroup>
+   <div class = "table-responsive">
+  <table class = "table table-hover">
   <thead>
     <tr>
-      <th scope="col">요청번호</th>
+      <th width=130 height=30 scope="col">요청번호</th>
       <th scope="col">프로젝트이름</th>
       <th scope="col">회사명</th>
-      <th scope="col">요청날짜</th>
+      <th width=130 height=30 scope="col">요청날짜</th>
       <th scope="col">상태</th>
     </tr>
     </thead>
@@ -37,30 +37,34 @@
     </c:forEach>
     </tbody>
   </table>
+  </div>
   
   
-  
+ 
   <c:if test="${count > 0}">
    <c:set var="pageCount" value="${count / pageSize + ( count % pageSize == 0 ? 0 : 1)}"/>
    <c:set var="startPage" value="${pageGroupSize*(numPageGroup-1)+1}"/>
    <c:set var="endPage" value="${startPage + pageGroupSize-1}"/>
    <c:if test="${endPage > pageCount}" >
      <c:set var="endPage" value="${pageCount}" />
-   </c:if>          
+   </c:if>
+ 	<ul class="pagination">     
    <c:if test="${numPageGroup > 1}">
-        <a href="./request_project_list?pageNum=${(numPageGroup-2)*pageGroupSize+1 }">[이전]</a>
+       <li><a href="./request_project_list?pageNum=${(numPageGroup-2)*pageGroupSize+1 }">prev</a>
    </c:if>
    <c:forEach var="i" begin="${startPage}" end="${endPage}">
-       <a href="./request_project_list?pageNum=${i}">  
+      <li><a href="./request_project_list?pageNum=${i}">  
           <c:if test="${currentPage == i}">          
         </c:if>
-        [ ${i} ]
+        ${i}
        </a>
    </c:forEach>
    <c:if test="${numPageGroup < pageGroupCount}">
-        <a href="./request_project_list?pageNum=${numPageGroup*pageGroupSize+1}">[다음]</a>
-   </c:if>
+   <li><a href="./list?pageNum=${numPageGroup*pageGroupSize+1}">next</a>
+ 	</c:if>
+ 	</ul>
 </c:if>
-  <div><a href="./mypage">마이페이지</a></div>
-  </body>
+
+	<div><a href="./mypage" class= "btn btn-default" role = "button">마이페이지</a></div>
+    </body>
 </html>

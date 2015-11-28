@@ -31,8 +31,8 @@ public class ViewController {
 	@PreAuthorize("hasRole('ROLE_EXECUTIVE')") 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	    public String dispMemberList(@RequestParam(value="pageNum", defaultValue="1") Integer pageNum, Model model) {
-		int pageSize = 10;		
-		int pageGroupSize = 5;
+		int pageSize = 2;		
+		int pageGroupSize = 2;
 			
 		int currentPage = pageNum;
 		int startRow = (currentPage - 1) * pageSize;//한 페이지의 시작글 번호

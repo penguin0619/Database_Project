@@ -6,6 +6,8 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <title>스프링프레임워크 게시판</title>
   	 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
      <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -15,24 +17,28 @@
   
   </head>
   <body>
+  <div class="container" style="display:inline_block:text_align:center;">
+  <h2>프로젝트 상세정보</h2>
   <ul style="list-style-type:circle">
-  <li>프로젝트명 : ${project.project_name}</li>
-  <li>회사명 : ${project.project_company_name}</li>
-  <li>프로젝트 시작희망날짜 : ${fn:substring(project.project_hope_start_date,0,4)}년
+
+  <li><strong>프로젝트명 :</strong> ${project.project_name}</li>
+  <li><strong>회사명 :</strong> ${project.project_company_name}</li>
+  <li><strong>프로젝트 시작희망날짜 :</strong> ${fn:substring(project.project_hope_start_date,0,4)}년
   			   ${fn:substring(project.project_hope_start_date,5,7)}월
   			   ${fn:substring(project.project_hope_start_date,8,10)}일
   </li>
-  <li>프로젝트 종료희망날짜 : ${fn:substring(project.project_hope_end_date,0,4)}년
+  <li><strong>프로젝트 종료희망날짜 :</strong> ${fn:substring(project.project_hope_end_date,0,4)}년
   			   ${fn:substring(project.project_hope_end_date,5,7)}월
   			   ${fn:substring(project.project_hope_end_date,8,10)}일
   </li>
-  <li>우편번호 : ${project.project_postcode}</li>
-  <li>주소 : ${project.project_address} </li>
-  <li>상세주소 : ${project.project_address_detail}</li>
-  <li>요청상태 : ${project.project_status}</li>
+  <li><strong>우편번호 :</strong> ${project.project_postcode}</li>
+  <li><strong>주소 :</strong> ${project.project_address} </li>
+  <li><strong>상세주소 :</strong> ${project.project_address_detail}</li>
+  <li><strong>요청상태 :</strong> ${project.project_status}</li>
   </ul>
-  <span>프로젝트요청 세부사항</span>
-  <div>${project.project_contents}</div><!-- 크기고정시키고 스크롤 넣을것 -->
+  <span>프로젝트요청 세부사항</span> 
+  <div>${project.project_contents}</div><!-- 크기고정시키고 스크롤 넣을것 --> 
+  
   <c:if test="${project.project_status eq '대기중'}">
   <form id="form" method="post" action="./request_approval">
   <input type="hidden" id="no" name="no" value="${project.project_request_no}"/>     
