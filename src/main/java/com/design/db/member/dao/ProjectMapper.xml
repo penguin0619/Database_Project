@@ -54,6 +54,11 @@
     <select id ="select_project_request_board" resultMap="project_requestMap" parameterType="java.util.Map">
     	SELECT * FROM project_request ORDER BY project_request_no DESC LIMIT #{offset1}, #{offset2}
     </select>
+   
+    <select id ="select_project_approval_board" resultMap="project_requestMap" parameterType="java.util.Map">
+    	SELECT * FROM project_request WHERE project_status ='결재중' ORDER BY project_request_no DESC LIMIT #{offset1}, #{offset2}
+    </select>
+    
     <select id ="select_count_request_project" resultType="int">
     	SELECT COUNT(*) FROM project_request
     </select>

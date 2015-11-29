@@ -17,6 +17,9 @@ public class ProjectDao {
 	public List<ProjectRequestVo> select_project_request_board(Map<String, Integer> map){
 		return this.projectMapper.select_project_request_board(map);		
 	}
+	public List<ProjectRequestVo> select_project_approval_board(Map<String, Integer> map){
+		return this.projectMapper.select_project_approval_board(map);
+	}
 	public Integer select_count_request_project(){
 		return this.projectMapper.select_count_request_project();
 	}

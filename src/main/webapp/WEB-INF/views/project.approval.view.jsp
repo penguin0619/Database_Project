@@ -34,13 +34,18 @@
   <span>프로젝트요청 세부사항</span>
   <div>${project.project_contents}</div><!-- 크기고정시키고 스크롤 넣을것 -->
   <c:if test="${project.project_status eq '대기중'}">
-  <sec:authorize access="hasRole('ROLE_SECRETARY')">
   <form id="form" method="post" action="./request_approval">
   <input type="hidden" id="no" name="no" value="${project.project_request_no}"/>     
   <div><span>의견</span><br><textarea rows="15" cols="50" id="opinion" name="opinion"></textarea></div>
   <button id="save" type="button" onclick="form_save('#form');">결재요청</button>
   </form>  
-  </sec:authorize>
-  </c:if>    
+  </c:if>  
+
+	<div>결재요청자 : ${request_approval_name}</div>
+	<div>결재현황 : ${approval.approval_checknum} / ${approval.approval_max_num}</div>
+	<div>승인 : ${approval.approval_count} / ${approval.approval_max_num}</div>
+	<div><span>의견</span><br> <textarea></textarea></div>
+	<button>결재승인</button> <button>결재거부</button>
+
   </body>
 </html>

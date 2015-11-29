@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.design.db.member.dao.MemberBeforeVo;
 import com.design.db.member.dao.MemberDao;
+import com.design.db.member.dao.MemberVo;
 import com.design.db.member.dao.ProjectApprovalVo;
 import com.design.db.member.dao.ProjectDao;
 import com.design.db.member.dao.ProjectRequestVo;
@@ -46,11 +48,11 @@ public class ViewController {
 		this.projectDao.insert_project_request(project_requestVo);
 		return "signin";
     }
-	@PreAuthorize("authenticated")
+	@PreAuthorize("hasRole('ROLE_EXECUTIVE') OR hasRole('ROLE_SECRETARY')")
 	@RequestMapping(value = "/request_project_list", method = RequestMethod.GET)
     public String dispReqProjectList(@RequestParam(value="pageNum", defaultValue="1") Integer pageNum, Model model) {
-		int pageSize = 5;		
-		int pageGroupSize = 5;
+		int pageSize = 2;		
+		int pageGroupSize = 2;
 			
 		int currentPage = pageNum;
 		int startRow = (currentPage - 1) * pageSize;//한 페이지의 시작글 번호
@@ -76,24 +78,58 @@ public class ViewController {
 		
         return "project.req.list";
     }
-	@PreAuthorize("authenticated") 
+	
+	@PreAuthorize("hasRole('ROLE_EXECUTIVE')")
+	@RequestMapping(value = "/request_approval_list", method = RequestMethod.GET)
+    public String dispReqApprovalList(@RequestParam(value="pageNum", defaultValue="1") Integer pageNum, Model model) {
+		int pageSize = 2;		
+		int pageGroupSize = 2;
+			
+		int currentPage = pageNum;
+		int startRow = (currentPage - 1) * pageSize;//한 페이지의 시작글 번호
+		int endRow = currentPage * pageSize;//한 페이지의 마지막 글번호
+		int count = this.projectDao.select_count_request_project();
+		int number=count-(currentPage-1)*pageSize;//글목록에 표시할 글번호
+		int pageGroupCount = count/(pageSize*pageGroupSize)+( count % (pageSize*pageGroupSize) == 0 ? 0 : 1);
+		int numPageGroup = (int) Math.ceil((double)currentPage/pageGroupSize);
+		Map<String, Integer> map =  new HashMap<String, Integer>();
+		map.put("offset1", startRow);
+		map.put("offset2", pageSize);
+		List<ProjectRequestVo> list = this.projectDao.select_project_approval_board(map);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("startRow", startRow);
+		model.addAttribute("endRow", endRow);
+		model.addAttribute("count", count);
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("number", number);
+		model.addAttribute("pageGroupSize", pageGroupSize);
+		model.addAttribute("numPageGroup", numPageGroup);
+		model.addAttribute("pageGroupCount", pageGroupCount);
+		model.addAttribute("list",list);			
+		
+        return "project.approval.list";
+    }
+	@PreAuthorize("hasRole('ROLE_EXECUTIVE') OR hasRole('ROLE_SECRETARY')") 
 	@RequestMapping(value = "/request_project_view", method = RequestMethod.GET)
     public String dispReqProjectView(@RequestParam(value="no", defaultValue="0") int project_request_no, Model model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String pos = this.memberDao.select_what_position(auth.getName());
-		
-		if(pos.equals("0")){
-			
-			ProjectApprovalVo approval = this.projectDao.selectOne_approval(project_request_no);
-			String request_approval_name = this.memberDao.select_user_name(approval.getMember_no());
-			System.out.println(request_approval_name);
-			model.addAttribute("request_approval_name", request_approval_name);
-			model.addAttribute("approval",approval);
-		}
+		ProjectRequestVo project = this.projectDao.selectone_request_project(project_request_no);
+        model.addAttribute("project", project);	
+        return "project.req.view";
+    }
+	
+	@PreAuthorize("hasRole('ROLE_EXECUTIVE')")  
+	@RequestMapping(value = "/request_approval_view", method = RequestMethod.GET)
+    public String dispReqApprovalView(@RequestParam(value="no", defaultValue="0") int project_request_no, Model model) {
+				
+		ProjectApprovalVo approval = this.projectDao.selectOne_approval(project_request_no);
+		String request_approval_name = this.memberDao.select_user_name(approval.getMember_no());
+		System.out.println(request_approval_name);
+		model.addAttribute("request_approval_name", request_approval_name);
+		model.addAttribute("approval",approval);
 		ProjectRequestVo project = this.projectDao.selectone_request_project(project_request_no);
         model.addAttribute("project", project);
 	
-        return "project.req.view";
+        return "project.approval.view";
     }
 	
 	@PreAuthorize("authenticated") 
