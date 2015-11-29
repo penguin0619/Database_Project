@@ -44,8 +44,7 @@
 	  		  		
 	  			<div class="form-group">
 	  			<label for="member_id" class="col-sm-2 control-label">회원 ID</label>
-	  			
-	  			<!-- <span>회원 아이디</span> -->
+	  			 			
 	  			<input type="text" id="member_id" name="member_id" value="${memberVo.member_id}" onkeyup="dup_check()" />
 	  			
 	  			<span id="duplicateResult"></span>

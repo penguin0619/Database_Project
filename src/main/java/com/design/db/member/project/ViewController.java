@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.design.db.member.dao.MemberBeforeVo;
 import com.design.db.member.dao.MemberDao;
-import com.design.db.member.dao.MemberVo;
 import com.design.db.member.dao.ProjectApprovalVo;
 import com.design.db.member.dao.ProjectDao;
 import com.design.db.member.dao.ProjectRequestVo;
@@ -51,7 +49,7 @@ public class ViewController {
 	@PreAuthorize("authenticated")
 	@RequestMapping(value = "/request_project_list", method = RequestMethod.GET)
     public String dispReqProjectList(@RequestParam(value="pageNum", defaultValue="1") Integer pageNum, Model model) {
-		int pageSize = 10;		
+		int pageSize = 5;		
 		int pageGroupSize = 5;
 			
 		int currentPage = pageNum;
