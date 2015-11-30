@@ -105,7 +105,7 @@ CREATE TABLE member_rate
 	appraiser_member_no    INTEGER NOT NULL,
 	performance_score     INTEGER  NOT NULL ,
 	communication_score   INTEGER  NOT NULL ,
-	details               TEXT  NULL ,
+	detail               TEXT  NULL ,
     PRIMARY KEY(member_no,project_no,appraiser_code,appraiser_member_no),
     FOREIGN KEY(member_no,project_no) REFERENCES member_history(member_no,project_no),
     FOREIGN KEY(appraiser_code) REFERENCES appraiser(appraiser_code)
@@ -121,7 +121,14 @@ CREATE TABLE approval
 	approval_detail    TEXT 	   NOT NULL ,
     PRIMARY KEY(member_no,project_no)    
 );
-
+CREATE TABLE approval_status
+(
+	member_no          INTEGER      NOT NULL ,
+	project_no         INTEGER      NOT NULL, 
+	approval_select	   VARCHAR(2)   NOT NULL,	
+	approval_opinion   VARCHAR(255) NOT NULL ,
+    PRIMARY KEY(member_no,project_no)    
+);
 
 INSERT INTO positions VALUES(0,'임원');
 INSERT INTO positions VALUES(1,'PM');
@@ -160,10 +167,16 @@ INSERT INTO `member_career` (`member_no`,`before_company_name`,`work_at_date`,`w
 VALUES('234698','효성','1998-11-20','2006-04-03','과장');
 
 INSERT INTO `member` (`member_id`,`member_password`,`member_degree`,`member_name`,`member_cellphone`,`member_pos_code`,`member_personal_id`)
-VALUES('qltj1','qltj1','고졸','비서1','010-1234-1114','2','9408222751812');
-INSERT INTO `member_skillset` (`member_no`,`member_skillset`)VALUES('234699','엑셀,');
+VALUES('pm1','pm1','대졸','피엠1','010-1354-1334','1','8406111861812');
+INSERT INTO `member_skillset` (`member_no`,`member_skillset`)VALUES('234699','자바,C언어,');
 INSERT INTO `member_career` (`member_no`,`before_company_name`,`work_at_date`,`work_end_date`,`position`)
-VALUES('234699','나모웹','2014-11-20','2015-04-03','비서');
+VALUES('234699','다음','2008-12-02','2010-06-03','과장');
+
+INSERT INTO `member` (`member_id`,`member_password`,`member_degree`,`member_name`,`member_cellphone`,`member_pos_code`,`member_personal_id`)
+VALUES('qltj1','qltj1','고졸','비서1','010-1234-1114','2','9408222751812');
+INSERT INTO `member_skillset` (`member_no`,`member_skillset`)VALUES('234700','엑셀,');
+INSERT INTO `member_career` (`member_no`,`before_company_name`,`work_at_date`,`work_end_date`,`position`)
+VALUES('234700','나모웹','2014-11-20','2015-04-03','비서');
 
 
 

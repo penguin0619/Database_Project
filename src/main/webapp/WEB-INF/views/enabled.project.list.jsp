@@ -49,7 +49,7 @@
     <tbody>
     <!-- 목록이 반복될 영역 -->
     <c:forEach var="item" items="${list}" varStatus="status">
-    <tr onclick="location.href='./request_approval_view?no=${item.project_request_no}'">
+    <tr onclick="location.href='./enabled_project_view?no=${item.project_request_no}'">
       <td>${item.project_request_no}</td>
       <td>${item.project_name}</td>
       <td>${item.project_company_name}</td>
@@ -73,16 +73,16 @@
 			<ul class="pagination">
 				<c:if test="${numPageGroup > 1}">
 					<li><a
-						href="./request_approval_list?pageNum=${(numPageGroup-2)*pageGroupSize+1}">prev</a></li>
+						href="./enabled_project_list?pageNum=${(numPageGroup-2)*pageGroupSize+1}">prev</a></li>
 				</c:if>
 				<c:forEach var="i" begin="${startPage}" end="${endPage}">
-					<li><a href="./request_approval_list?pageNum=${i}"> <c:if
+					<li><a href="./enabled_project_list?pageNum=${i}"> <c:if
 								test="${currentPage == i}">
 							</c:if> ${i}
 					</a></li>
 				</c:forEach>
 				<c:if test="${numPageGroup < pageGroupCount}">
-					<li><a href="./request_approval_list?pageNum=${numPageGroup*pageGroupSize+1}">next</a></li>
+					<li><a href="./enabled_project_list?pageNum=${numPageGroup*pageGroupSize+1}">next</a></li>
 				</c:if>
 			</ul>
 		</c:if>

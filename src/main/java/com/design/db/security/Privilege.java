@@ -1,4 +1,4 @@
-package com.design.db.member.security;
+package com.design.db.security;
 
 public class Privilege {
     private String name;

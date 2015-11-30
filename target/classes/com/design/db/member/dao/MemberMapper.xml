@@ -13,8 +13,7 @@
         <result property="member_personal_id"       column="member_personal_id" />
         <result property="member_skillset"       column="member_skillset" />
                 
-    </resultMap>
-    
+    </resultMap>    
     <resultMap id="memberBeforeMap" type="com.design.db.member.dao.MemberBeforeVo">        
         <id property="member_no"    column="member_no" />
         <result property="before_company_name" column="before_company_name" />
@@ -22,6 +21,13 @@
         <result property="work_at_date"       column="work_at_date" />
         <result property="work_end_date"       column="work_end_date" />                       
     </resultMap>
+        <resultMap id="memberRoleMap" type="com.design.db.member.dao.MemberRoleVo">        
+        <result property="role_no"       column="role_no" />
+        <result property="role"       column="role" />                       
+    </resultMap>
+    
+
+
 
     <select id="select" resultMap="memberMap">
         SELECT  * FROM member
@@ -33,6 +39,10 @@
     
     <select id="select_id" resultMap="memberMap">
         SELECT  * FROM member WHERE member_id = #{member_id}
+    </select>
+    
+    <select id="select_role" resultMap="memberRoleMap">
+    	SELECT * FROM project_role WHERE role_no != '10';
     </select>
     
     <select id="select_no" resultMap="memberMap">
@@ -70,8 +80,17 @@
     	SELECT * FROM member ORDER BY member_name DESC LIMIT #{offset1}, #{offset2}
     </select>
     
+    <select id ="select_make_project_board" resultMap="memberMap" parameterType="java.util.Map">
+    	SELECT * FROM member NATURAL JOIN member_skillset
+    	WHERE member_pos_code='3' ORDER BY member_name DESC LIMIT #{offset1}, #{offset2}
+    </select>
+    
     <select id ="select_count_member" resultType="int">
     	SELECT COUNT(*) FROM member;
+    </select>
+    
+    <select id ="select_count_project_member" resultType="int">
+    	SELECT COUNT(*) FROM member WHERE member_pos_code='3';
     </select>
     
     <insert id="insert" useGeneratedKeys="true" parameterType="com.design.db.member.dao.MemberVo" >

@@ -35,8 +35,8 @@
 
      </http>
 
-     <beans:bean id="signinSuccessHandler" class="com.design.db.member.SigninSuccessHandler" />
-     <beans:bean id="signinFailureHandler" class="com.design.db.member.SigninFailureHandler">
+     <beans:bean id="signinSuccessHandler" class="com.design.db.SigninSuccessHandler" />
+     <beans:bean id="signinFailureHandler" class="com.design.db.SigninFailureHandler">
           <beans:property name="defaultFailureUrl" value="/signin?error=true" />
      </beans:bean>
 <!--  
@@ -50,7 +50,7 @@
           </authentication-provider>
      </authentication-manager>
 -->
-  <beans:bean id="userService" class="com.design.db.member.security.UserService" />
+  <beans:bean id="userService" class="com.design.db.security.UserService" />
 
     <beans:bean id="encoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" />
     <beans:bean id="saltSource" class="org.springframework.security.authentication.dao.ReflectionSaltSource">

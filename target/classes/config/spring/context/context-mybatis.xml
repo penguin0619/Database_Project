@@ -12,13 +12,14 @@
         <property name="mapperLocations">
             <list>
                 <value>classpath*:com/design/db/**/dao/*Mapper.xml</value>
+                
             </list>
         </property>
     </bean>
 
     <!-- scan for mappers and let them be autowired -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.design.db.member" />
+        <property name="basePackage" value="com.design.db" />
         <property name="annotationClass" value="org.springframework.stereotype.Repository"/>
     </bean>
 </beans>

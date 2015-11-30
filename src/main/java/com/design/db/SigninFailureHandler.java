@@ -1,4 +1,4 @@
-package com.design.db.member;
+package com.design.db;
 
 import java.io.IOException;
 import java.io.PrintWriter;

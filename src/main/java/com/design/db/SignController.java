@@ -1,4 +1,4 @@
-package com.design.db.member;
+package com.design.db;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

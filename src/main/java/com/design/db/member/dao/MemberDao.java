@@ -49,8 +49,18 @@ public class MemberDao {
 	public int select_count_member(){
 		return this.memberMapper.select_count_member();
 	}
+	public int select_count_project_member(){
+		return this.memberMapper.select_count_project_member();
+	}
+	
 	public List<MemberVo> select_member_board(Map<String, Integer> map){
 		return this.memberMapper.select_member_board(map);		
+	}
+	public List<MemberVo> select_make_project_board(Map<String, Integer> map){
+		return this.memberMapper.select_make_project_board(map);		
+	}
+	public List<MemberRoleVo> select_role(){
+		return this.memberMapper.select_role();
 	}
 }
 

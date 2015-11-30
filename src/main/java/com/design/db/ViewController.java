@@ -1,4 +1,4 @@
-package com.design.db.member;
+package com.design.db;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +57,7 @@ public class ViewController {
 		model.addAttribute("list",list);	
 	        return "member.list";
 	    }
-	@RequestMapping("/member.view")
+	@RequestMapping("/member_view")
     public String dispMemberView(@RequestParam(value="no", defaultValue="0") int member_no, Model model) {
         MemberVo member = this.memberDao.selectno(member_no);
         List<MemberBeforeVo> career = this.memberDao.select_career(member_no);
@@ -67,7 +67,6 @@ public class ViewController {
         }
         model.addAttribute("career", career);
         model.addAttribute("member", member);
-        System.out.println(career.size());
         return "member.view";
     }
 	

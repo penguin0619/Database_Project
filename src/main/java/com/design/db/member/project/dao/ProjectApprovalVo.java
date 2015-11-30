@@ -1,4 +1,4 @@
-package com.design.db.member.dao;
+package com.design.db.member.project.dao;
 
 public class ProjectApprovalVo {
 	private String member_no;

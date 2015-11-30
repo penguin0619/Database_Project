@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.design.db.member.project.dao.ProjectMapper">
+    <resultMap id="project_requestMap" type="com.design.db.member.project.dao.ProjectRequestVo">
+        <id property="project_request_no"    column="project_request_no" />
+        <result property="project_name" column="project_name" />
+        <result property="project_company_name"       column="project_company_name" />
+        <result property="project_hope_start_date"       column="project_hope_start_date" />
+        <result property="project_hope_end_date"       column="project_hope_end_date" />
+        <result property="project_register_date"       column="project_register_date" />
+        <result property="project_postcode"       column="project_postcode" />
+        <result property="project_address"       column="project_address" />
+        <result property="project_address_detail"       column="project_address_detail" />
+        <result property="project_contents"       column="project_contents" />
+        <result property="project_status"       column="project_status" />
+    </resultMap>
+    
+       <resultMap id="project_approvalMap" type="com.design.db.member.project.dao.ProjectApprovalVo">
+        <result property="member_no"    column="member_no" />
+        <result property="project_no"       column="project_no" />
+        <result property="approval_max_num"       column="approval_max_num" />
+        <result property="approval_checknum"       column="approval_checknum" />
+        <result property="approval_count"       column="approval_count" />
+        <result property="approval_detail"       column="approval_detail" />        
+     </resultMap>
+     <resultMap id="project_selectMap" type="com.design.db.member.project.dao.ProjectSelectVo">
+        <result property="member_no"    column="member_no" />
+        <result property="project_no"       column="project_no" />
+        <result property="approval_select"       column="approval_select" />
+        <result property="approval_opinion"       column="approval_opinion" />     
+     </resultMap>
+	 
+	 <resultMap id="project_historyMap" type="com.design.db.member.project.dao.ProjectHistoryVo">
+        <result property="member_no"    column="member_no" />
+        <result property="project_no"       column="project_no" />
+        <result property="role_no"       column="role_no" />
+        <result property="project_start_date"       column="project_start_date" /> 
+        <result property="project_end_date"       column="project_end_date" /> 
+        <result property="project_avg"       column="project_avg" />       
+     </resultMap>
+     <resultMap id="projectMap" type="com.design.db.member.project.dao.ProjectVo">
+        <result property="project_no"       column="project_no" />
+        <result property="project_start_date"       column="project_start_date" /> 
+        <result property="project_end_date"       column="project_end_date" /> 
+        <result property="project_details"       column="project_details" />       
+     </resultMap>
+	
+   <insert id="insert_approval_request" useGeneratedKeys="true" parameterType="com.design.db.member.project.dao.ProjectApprovalVo" >
+   	INSERT INTO approval VALUES (
+                #{member_no}
+              , #{project_no}
+              , #{approval_max_num}
+              , #{approval_checknum}
+              , #{approval_count}
+              , #{approval_detail}                       
+         )       
+   </insert>  
+    <insert id="insert_approval_select" useGeneratedKeys="true" parameterType="com.design.db.member.project.dao.ProjectSelectVo" >
+   	INSERT INTO approval_status VALUES (
+                #{member_no}
+              , #{project_no}
+              , #{approval_select}
+              , #{approval_opinion}                       
+         )       
+   </insert>  
+   <insert id="insert_project_history" useGeneratedKeys="true" parameterType="com.design.db.member.project.dao.ProjectHistoryVo" >
+   		INSERT INTO member_history VALUES(
+			 #{member_no}
+			,#{project_no}
+			,#{role_no}
+			,#{project_start_date}
+			,#{project_end_date}
+			,#{project_avg}
+			)
+
+   </insert> 
+     
+   <insert id="insert_project_request" useGeneratedKeys="true" parameterType="com.design.db.member.project.dao.ProjectRequestVo" >
+       INSERT INTO project_request (project_name, project_company_name, project_hope_start_date, project_hope_end_date,
+          project_register_date,project_postcode,project_address,project_address_detail,project_contents,project_status ) VALUES (
+                #{project_name}
+              , #{project_company_name}
+              , #{project_hope_start_date}
+              , #{project_hope_end_date}
+              , #{project_register_date}
+              , #{project_postcode}
+              , #{project_address}
+              , #{project_address_detail}
+              , #{project_contents}
+              , #{project_status}              
+         )       
+    </insert>
+    
+    <insert id ="insert_project">
+    	INSERT INTO project VALUES(
+			 #{project_no}
+			,#{project_start_date}
+			,#{project_end_date}
+			,#{project_details}
+			)
+    </insert>
+    <select id ="select_project_request_board" resultMap="project_requestMap" parameterType="java.util.Map">
+    	SELECT * FROM project_request ORDER BY project_request_no DESC LIMIT #{offset1}, #{offset2}
+    </select>
+   
+    <select id ="select_project_approval_board" resultMap="project_requestMap" parameterType="java.util.Map">
+    	SELECT * FROM project_request WHERE project_status ='결재중' ORDER BY project_request_no DESC LIMIT #{offset1}, #{offset2}
+    </select>
+    
+    <select id ="select_approval_executive" resultMap="project_selectMap" parameterType="String">
+    	SELECT * FROM approval_status WHERE approval_select='Y' AND project_no=#{project_no}
+    </select>
+    
+    <select id ="select_project_enabled_board" resultMap="project_requestMap" parameterType="java.util.Map">
+    	SELECT * FROM project_request WHERE project_status ='승인' ORDER BY project_request_no DESC LIMIT #{offset1}, #{offset2}
+    </select>
+    
+    <select id ="select_count_request_project" resultType="int">
+    	SELECT COUNT(*) FROM project_request
+    </select>
+    <select id ="select_approval_is" resultType="int" parameterType="java.util.Map">
+    	SELECT COUNT(*) FROM approval_status 
+    	WHERE member_no=${member_no} AND project_no=${project_no} 
+    </select>
+    
+    <select id ="select_count_approval_project" resultType="int">
+    	SELECT COUNT(*) FROM project_request WHERE project_status ='결재중'
+    </select>
+    
+    <select id ="select_private_history_board" resultMap="project_requestMap" parameterType="java.util.Map">
+    	SELECT * FROM project_request 
+    	WHERE project_request_no 
+    	IN (SELECT project_no FROM member_history WHERE member_no = #{member_no})
+    	ORDER BY project_request_no DESC LIMIT #{offset1}, #{offset2}
+    </select>   
+    
+    <select id ="select_history_is" resultType="int" parameterType="java.util.Map">
+    	SELECT COUNT(*) FROM project_request 
+    	WHERE project_request_no 
+    	IN (SELECT project_no FROM member_history WHERE member_no = #{member_no})    	
+    </select>
+
+    
+    <select id ="selectone_request_project" resultMap="project_requestMap" parameterType="int">
+    	SELECT * FROM project_request WHERE project_request_no=#{project_request_no}
+    </select> 
+    
+    <select id="selectOne_approval" resultMap="project_approvalMap" parameterType="int">
+    	SELECT * FROM approval WHERE project_no = #{project_request_no}
+    </select>
+    <update id ="update_status" parameterType="java.util.Map">
+    	UPDATE project_request
+		SET project_status=#{status}
+		WHERE project_request_no=#{no}
+    </update>
+    <update id ="update_count" parameterType="int">
+    	UPDATE approval
+		SET approval_count= approval_count + 1
+		WHERE project_no=#{project_no}
+    </update>
+    <update id ="update_checknum" parameterType="int">
+    	UPDATE approval
+		SET approval_checknum= approval_checknum + 1
+		WHERE project_no=#{project_no}
+    </update>
+</mapper>

@@ -1,4 +1,4 @@
-package com.design.db.member.security;
+package com.design.db.security;
 
 import java.util.List;
 import org.springframework.security.core.GrantedAuthority;

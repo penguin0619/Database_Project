@@ -21,5 +21,8 @@ public interface MemberMapper {
     String select_what_position(String user_id);
     String select_user_name(String member_no);
     int select_count_member();
+    int select_count_project_member();
     List<MemberVo> select_member_board(Map<String,Integer> map);
-}
+    List<MemberVo> select_make_project_board(Map<String,Integer> map);
+    List<MemberRoleVo> select_role();
+   }
