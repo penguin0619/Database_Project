@@ -19,6 +19,8 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.design.db.member.dao.*;
+import com.design.db.member.project.dao.ProjectDao;
+import com.design.db.member.project.dao.ProjectHistoryVo;
 import com.thoughtworks.xstream.XStream;
 
 @Controller(value = "viewController")
@@ -27,6 +29,47 @@ public class ViewController {
 	
 	@Resource(name = "memberDao")
 	    private MemberDao memberDao;
+	@Resource(name = "projectDao")
+		private ProjectDao projectDao;
+
+	
+	@PreAuthorize("hasRole('ROLE_EXECUTIVE')") 
+	@RequestMapping(value = "/status_member_view", method = RequestMethod.GET)
+	    public String dispPosMemberList(@RequestParam(value="pageNum", defaultValue="1") Integer pageNum, 
+	    		@RequestParam(value="pos_code", defaultValue="99") String pos_code, Model model) {
+		int pageSize = 10;		
+		int pageGroupSize = 5;
+		int pos_code_i = Integer.parseInt(pos_code);
+		int currentPage = pageNum;
+		int startRow = (currentPage - 1) * pageSize;//한 페이지의 시작글 번호
+		int endRow = currentPage * pageSize;//한 페이지의 마지막 글번호
+		int count; 
+		if(pos_code.equals("-1")) count = this.memberDao.select_count_member();
+		else count = Integer.parseInt(this.memberDao.select_count_positions(pos_code));
+		int number=count-(currentPage-1)*pageSize;//글목록에 표시할 글번호
+		int pageGroupCount = count/(pageSize*pageGroupSize)+( count % (pageSize*pageGroupSize) == 0 ? 0 : 1);
+		int numPageGroup = (int) Math.ceil((double)currentPage/pageGroupSize);
+		Map<String, Integer> map =  new HashMap<String, Integer>();
+		map.put("offset1", startRow);
+		map.put("offset2", pageSize);
+		map.put("pos_code", pos_code_i);
+		List<MemberVo> list;
+		if(pos_code.equals("-1")) list = this.memberDao.select_member_board(map);
+		else list = this.memberDao.select_position_board(map);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("startRow", startRow);
+		model.addAttribute("endRow", endRow);
+		model.addAttribute("count", count);
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("number", number);
+		model.addAttribute("pageGroupSize", pageGroupSize);
+		model.addAttribute("numPageGroup", numPageGroup);
+		model.addAttribute("pageGroupCount", pageGroupCount);
+		model.addAttribute("list",list);
+		model.addAttribute("pos_code", pos_code);
+	        return "member.pos.list";
+	    }
+	
 	
 	@PreAuthorize("hasRole('ROLE_EXECUTIVE')") 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -60,13 +103,17 @@ public class ViewController {
 	@RequestMapping("/member_view")
     public String dispMemberView(@RequestParam(value="no", defaultValue="0") int member_no, Model model) {
         MemberVo member = this.memberDao.selectno(member_no);
+        String member_no_s = Integer.toString(member_no);
         List<MemberBeforeVo> career = this.memberDao.select_career(member_no);
         
         if(member.getMember_skillset() == null){
         	member.setMember_skillset("없음");
         }
+        List<ProjectHistoryVo> history = this.projectDao.select_member_history(member_no_s);
+        
         model.addAttribute("career", career);
         model.addAttribute("member", member);
+        model.addAttribute("history", history);
         return "member.view";
     }
 	

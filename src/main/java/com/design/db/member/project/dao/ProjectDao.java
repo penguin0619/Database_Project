@@ -26,6 +26,18 @@ public class ProjectDao {
 	public List<ProjectRequestVo> select_project_enabled_board(Map<String, Integer> map){
 		return this.projectMapper.select_project_enabled_board(map);
 	}
+	public List<ProjectRequestVo> select_project_waiting_board(Map<String, Integer> map){
+		return this.projectMapper.select_project_waiting_board(map);
+	}
+	public List<ProjectRequestVo> select_project_no_board(Map<String, Integer> map){
+		return this.projectMapper.select_project_no_board(map);
+	}
+	public List<ProjectRequestVo> select_project_ing_board(Map<String, Integer> map){
+		return this.projectMapper.select_project_ing_board(map);
+	}
+	public List<ProjectRequestVo> select_project_end_board(Map<String, Integer> map){
+		return this.projectMapper.select_project_end_board(map);
+	}
 	
 	public Integer select_count_request_project(){
 		return this.projectMapper.select_count_request_project();
@@ -35,6 +47,9 @@ public class ProjectDao {
 	}
 	public int select_approval_is(Map<String, String> map){
 		return this.projectMapper.select_approval_is(map);
+	}
+	public List<ProjectHistoryVo> select_member_history(String member_no){
+		return this.projectMapper.select_member_history(member_no);
 	}
 	public int select_history_is(Map<String, Integer> map){
 		return this.projectMapper.select_history_is(map);
@@ -95,7 +110,11 @@ public class ProjectDao {
 	}
 	public List<ProjectRequestVo> appraise_list(Map<String, Integer> map){
 		return this.projectMapper.appraise_list(map);
+	}	
+	public int select_count_status_project(Map<String, String> map){
+		return this.projectMapper.select_count_status_project(map);
 	}
+
 }
 
 

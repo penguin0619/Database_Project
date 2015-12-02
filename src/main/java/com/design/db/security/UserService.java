@@ -45,7 +45,7 @@ public class UserService implements UserDetailsService {
         }else if (memberVo.getMember_pos_code() == 2){
         	role.setName("ROLE_SECRETARY");
         }else if (memberVo.getMember_pos_code() == 3){
-        	role.setName("Role_NORMAL");
+        	role.setName("ROLE_NORMAL");
         }
         List<Role> roles = new ArrayList<Role>();
         roles.add(role);

@@ -32,10 +32,112 @@ public class ViewController {
 	@Resource(name = "memberDao")
 	private MemberDao memberDao;
 	
+	
 	@RequestMapping(value = "/request_project", method = RequestMethod.GET)
     public String reqProject(Model model) {
         return "project.req.write";
     }
+	
+	
+	
+	@RequestMapping(value = "/status_info_list")
+    public String showInformation(Model model) {
+		Map<String, String> map_s =  new HashMap<String, String>();
+		map_s.put("status", "대기중");
+		int total = this.projectDao.select_count_request_project();
+		int waiting = this.projectDao.select_count_status_project(map_s);
+		map_s.put("status", "결재중");
+		int approval = this.projectDao.select_count_status_project(map_s);
+		map_s.put("status", "승인");
+		int yes = this.projectDao.select_count_status_project(map_s);
+		map_s.put("status", "거절");
+		int no = this.projectDao.select_count_status_project(map_s);
+		map_s.put("status", "진행중");
+		int ing = this.projectDao.select_count_status_project(map_s);
+		map_s.put("status", "종료");
+		int end = this.projectDao.select_count_status_project(map_s);
+		int total_member = this.memberDao.select_count_member();
+		String executive = this.memberDao.select_count_positions("0");
+		String pm = this.memberDao.select_count_positions("1");
+		String secretary = this.memberDao.select_count_positions("2");
+		String normal = this.memberDao.select_count_positions("3");
+		
+		model.addAttribute("total", total);
+		model.addAttribute("waiting", waiting);
+		model.addAttribute("approval", approval);
+		model.addAttribute("yes", yes);
+		model.addAttribute("no", no);
+		model.addAttribute("ing", ing);
+		model.addAttribute("end", end);
+		model.addAttribute("total_member", total_member);
+		model.addAttribute("executive", executive);
+		model.addAttribute("pm", pm);
+		model.addAttribute("secretary", secretary);
+		model.addAttribute("normal", normal);
+        return "project.member.show";
+    }
+	@PreAuthorize("hasRole('ROLE_EXECUTIVE') OR hasRole('ROLE_SECRETARY')")
+	@RequestMapping(value = "/status_project_view", method = RequestMethod.GET)
+    public String dispStageList(@RequestParam(value="pageNum", defaultValue="1") Integer pageNum, Model model,
+    		@RequestParam(value="status") String status) {
+		Map<String, String> map_s =  new HashMap<String, String>();
+		map_s.put("status", status);
+		int pageSize = 10;		
+		int pageGroupSize = 5;			
+		int currentPage = pageNum;
+		int startRow = (currentPage - 1) * pageSize;//한 페이지의 시작글 번호
+		int endRow = currentPage * pageSize;//한 페이지의 마지막 글번호
+		int count;
+		
+		if(status.equals("총합")){
+			count = this.projectDao.select_count_request_project();
+		}else{			
+			count = this.projectDao.select_count_status_project(map_s);
+			System.out.println(count);
+		}
+		
+		int number=count-(currentPage-1)*pageSize;//글목록에 표시할 글번호
+		int pageGroupCount = count/(pageSize*pageGroupSize)+( count % (pageSize*pageGroupSize) == 0 ? 0 : 1);
+		int numPageGroup = (int) Math.ceil((double)currentPage/pageGroupSize);
+		Map<String, Integer> map =  new HashMap<String, Integer>();
+		map.put("offset1", startRow);
+		map.put("offset2", pageSize);
+		List<ProjectRequestVo> list;
+		if(status.equals("총합")){
+			list = this.projectDao.select_project_request_board(map);
+		}else if(status.equals("대기중")){
+			list = this.projectDao.select_project_waiting_board(map);
+		}else if(status.equals("결재중")){
+			list = this.projectDao.select_project_approval_board(map);
+		}else if(status.equals("승인")){
+			list = this.projectDao.select_project_enabled_board(map);
+		}else if(status.equals("거절")){
+			list = this.projectDao.select_project_no_board(map);
+		}else if(status.equals("진행중")){
+			list = this.projectDao.select_project_ing_board(map);
+		}else if(status.equals("종료")){
+			list = this.projectDao.select_project_end_board(map);
+		}else{
+			list = this.projectDao.select_project_request_board(map);
+		}
+		
+		
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("startRow", startRow);
+		model.addAttribute("endRow", endRow);
+		model.addAttribute("count", count);
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("number", number);
+		model.addAttribute("pageGroupSize", pageGroupSize);
+		model.addAttribute("numPageGroup", numPageGroup);
+		model.addAttribute("pageGroupCount", pageGroupCount);
+		model.addAttribute("list",list);			
+		
+        return "project.status.list";
+    }
+	
+	
+	
 	@RequestMapping(value = "/project_write_ok", method = RequestMethod.POST)
     public String writeProject(@ModelAttribute("object") ProjectRequestVo project_requestVo) {
 		long todaytime = System.currentTimeMillis(); 
@@ -50,8 +152,8 @@ public class ViewController {
 	@PreAuthorize("hasRole('ROLE_EXECUTIVE') OR hasRole('ROLE_SECRETARY')")
 	@RequestMapping(value = "/request_project_list", method = RequestMethod.GET)
     public String dispReqProjectList(@RequestParam(value="pageNum", defaultValue="1") Integer pageNum, Model model) {
-		int pageSize = 2;		
-		int pageGroupSize = 2;
+		int pageSize = 10;		
+		int pageGroupSize = 5;
 			
 		int currentPage = pageNum;
 		int startRow = (currentPage - 1) * pageSize;//한 페이지의 시작글 번호
@@ -81,8 +183,8 @@ public class ViewController {
 	@PreAuthorize("hasRole('ROLE_EXECUTIVE')")
 	@RequestMapping(value = "/request_approval_list", method = RequestMethod.GET)
     public String dispReqApprovalList(@RequestParam(value="pageNum", defaultValue="1") Integer pageNum, Model model) {
-		int pageSize = 2;		
-		int pageGroupSize = 2;
+		int pageSize = 10;		
+		int pageGroupSize = 5;
 			
 		int currentPage = pageNum;
 		int startRow = (currentPage - 1) * pageSize;//한 페이지의 시작글 번호

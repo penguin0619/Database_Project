@@ -18,7 +18,7 @@ public class SignController {
      @Autowired
      private PasswordEncoder passwordEncoder;
 
-     @RequestMapping(value="/signin", method = RequestMethod.GET)
+     @RequestMapping(value="/", method = RequestMethod.GET)
      public String signin(@RequestParam(value="error", required=false) String error, Model model) {
 
           model.addAttribute("error", error);

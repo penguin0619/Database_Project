@@ -27,4 +27,5 @@ public interface MemberMapper {
     List<MemberVo> select_make_project_board();
     List<MemberVo> select_add_project_board(String project_no);
     List<MemberRoleVo> select_role();
+    List<MemberVo> select_position_board(Map<String,Integer> map);
    }

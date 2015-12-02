@@ -16,6 +16,10 @@ public interface ProjectMapper {
 	List<ProjectRequestVo> select_project_request_board(Map<String, Integer> map);
 	List<ProjectRequestVo> select_project_approval_board(Map<String, Integer> map);
 	List<ProjectRequestVo> select_project_enabled_board(Map<String, Integer> map);
+	List<ProjectRequestVo> select_project_waiting_board(Map<String, Integer> map);
+	List<ProjectRequestVo> select_project_no_board(Map<String, Integer> map);
+	List<ProjectRequestVo> select_project_ing_board(Map<String, Integer> map);
+	List<ProjectRequestVo> select_project_end_board(Map<String, Integer> map);
 	ProjectRequestVo selectone_request_project(int project_request_no);
 	void update_status(Map<String,String> map);
 	void end_project_member(Map<String,String> map);
@@ -28,6 +32,7 @@ public interface ProjectMapper {
 	void insert_project(ProjectVo project);
 	List<ProjectRequestVo> select_private_history_board(Map<String, Integer> map);
 	List<ProjectHistoryVo> select_current_project(Map<String, Integer> map);
+	List<ProjectHistoryVo> select_member_history(String member_no);
 	int select_approval_is(Map<String, String> map);
 	int select_count_approval_project();
 	void end_project(Map<String, String> map);
@@ -36,4 +41,6 @@ public interface ProjectMapper {
 	String select_pm(String project_no);
 	int appraise_count(String member_no);
 	List<ProjectRequestVo> appraise_list(Map<String, Integer> map);
+	int select_count_status_project(Map<String, String> map);
+	
 }

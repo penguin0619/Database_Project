@@ -27,6 +27,27 @@
 	AND appraiser_member_no =#{member_no}
 	ORDER BY appraiser_code DESC
 	</select>
+	
+	<select id ="select_complete_appraise" resultMap="rateMap" parameterType="java.util.Map">
+	SELECT * FROM member_rate 
+	NATURAL JOIN appraiser 
+	NATURAL JOIN member_history
+	NATURAL JOIN project_role
+	INNER JOIN member
+	ON member_rate.appraiser_member_no = member.member_no
+	WHERE project_no=#{project_no}
+	AND member_rate.member_no =#{member_no}
+    AND performance_score!=0
+	ORDER BY appraiser_code DESC LIMIT #{offset1}, #{offset2}
+	</select>
+	
+	<select id ="count_complete_appraise" resultType="int" parameterType="java.util.Map">
+	SELECT COUNT(*) FROM member_rate 
+	WHERE project_no=#{project_no}
+	AND member_no =#{member_no}
+    AND performance_score!=0	
+	</select>
+	
 	<update id="end_project_date" parameterType="java.util.Map">
     	UPDATE project
 		SET project_end_date = #{current_time}

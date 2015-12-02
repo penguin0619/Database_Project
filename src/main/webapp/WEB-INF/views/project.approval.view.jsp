@@ -15,39 +15,86 @@
   
   </head>
   <body>
-  <ul style="list-style-type:circle">
-  <li>프로젝트명 : ${project.project_name}</li>
-  <li>회사명 : ${project.project_company_name}</li>
-  <li>프로젝트 시작희망날짜 : ${fn:substring(project.project_hope_start_date,0,4)}년
+  
+  <div class="navbar navbar-inverse navbar-fixed-top">
+     
+        <div class="navbar-header">
+             
+          <a class="navbar-brand" href="#">프람트소프트웨어</a>
+       
+        </div>
+</div>
+  
+  <div class = "container" style="margin-top: 100px;">
+  
+<div class = "form-group">
+<label for="user_id" class="sr-only" style="margin-top: 100px;" >User ID</label>
+	<h3>프로젝트명 : ${project.project_name}</h3>
+</div>
+<div class = "form-group">
+	회사명 : ${project.project_company_name}
+</div>
+<div class = "form-group">
+	프로젝트 시작희망날짜 : ${fn:substring(project.project_hope_start_date,0,4)}년
   			   ${fn:substring(project.project_hope_start_date,5,7)}월
   			   ${fn:substring(project.project_hope_start_date,8,10)}일
-  </li>
-  <li>프로젝트 종료희망날짜 : ${fn:substring(project.project_hope_end_date,0,4)}년
+</div>
+<div class = "form-group">
+프로젝트 종료희망날짜 : ${fn:substring(project.project_hope_end_date,0,4)}년
   			   ${fn:substring(project.project_hope_end_date,5,7)}월
   			   ${fn:substring(project.project_hope_end_date,8,10)}일
-  </li>
-  <li>우편번호 : ${project.project_postcode}</li>
-  <li>주소 : ${project.project_address} </li>
-  <li>상세주소 : ${project.project_address_detail}</li>
-  <li>요청상태 : ${project.project_status}</li>
-  </ul>
-  <span>프로젝트요청 세부사항</span>
-  <div>${project.project_contents}</div><!-- 크기고정시키고 스크롤 넣을것 -->
-	<div>결재요청자 : ${request_approval_name}</div>
-	<div>결재현황 : ${approval.approval_checknum} / ${approval.approval_max_num}</div>
-	<div>승인 : ${approval.approval_count} / ${approval.approval_max_num}</div>
+</div>
+<div class = "form-group">
+우편번호 : ${project.project_postcode}
+</div>
+<div class = "form-group">
+주소 : ${project.project_address}
+</div>
+
+<div class = "form-group">
+상세주소 : ${project.project_address_detail}
+</div>
+
+<div class = "form-group">
+요청상태 : ${project.project_status}
+</div>
+
+
+<div class = "form-group">
+
+  <h3>프로젝트요청 세부사항</h3><br>
+  <div style="width:50%;height: 200px;border:1px solid black;overflow-y:scroll;">
+  ${project.project_contents}
+  </div><!-- 크기고정시키고 스크롤 넣을것 -->
+  <br>
+	<div class = "form-group">결재요청자 : ${request_approval_name}</div>
+	<div class = "form-group">결재현황 : ${approval.approval_checknum} / ${approval.approval_max_num}</div>
+	<div class = "form-group">승인 : ${approval.approval_count} / ${approval.approval_max_num}</div>
 	<c:if test="${approval_is eq '0'}">
 	<form id="form" method="post" action="./approval_select">
-	<div><span>의견</span><br>
+	
+	
+	<div class = "form-group">의견<br>
+	
 	<input type="hidden" name="project_request_no" id="project_request_no" value="${project.project_request_no}"/>
 	<input type="hidden" name="select" id="select" value=""/>
-	<textarea rows="10" cols="30" id="opinion" name="opinion"></textarea></div>
-	<button id="approval" type="button"  onclick="form_approval('#form');">승인</button> 
-	<button id="refusal"  type="button"  onclick="form_refusal('#form');">기각</button>
+	
+	<div >
+	<textarea style="width:50%;height: 100px" id="opinion" name="opinion"></textarea>
+	</div>
+	</div>
+	<button class = "btn btn-md btn-default"  id="approval" type="button"  onclick="form_approval('#form');">승인</button> 
+	<button class = "btn btn-md btn-default"  id="refusal"  type="button"  onclick="form_refusal('#form');">기각</button>
 	</form>	
 	</c:if>
 	<c:if test="${approval_is eq '1'}">
-	<div><span>이미 결재하셨습니다</span></div>
+	<div>이미 결재하셨습니다.</div>
 	</c:if>
+</div>
+
+  
+	
+	
+</div>
   </body>
 </html>

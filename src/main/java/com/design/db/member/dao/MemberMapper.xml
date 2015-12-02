@@ -68,6 +68,8 @@
     	WHERE member_pos_code = #{member_pos_code} 
     </select>
     
+    
+    
     <select id="select_user_no" resultType="String" parameterType="String" >
         SELECT member_no FROM member WHERE member_id = #{user_id}
     </select>
@@ -78,6 +80,12 @@
     
     <select id ="select_member_board" resultMap="memberMap" parameterType="java.util.Map">
     	SELECT * FROM member ORDER BY member_name DESC LIMIT #{offset1}, #{offset2}
+    </select>
+    
+    <select id ="select_position_board" resultMap="memberMap" parameterType="java.util.Map">
+    	SELECT * FROM member WHERE member_pos_code=#{pos_code}
+    	ORDER BY member_name DESC LIMIT #{offset1}, #{offset2}
+    
     </select>
     
     <select id ="select_make_project_board" resultMap="memberMap">

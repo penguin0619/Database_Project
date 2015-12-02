@@ -42,9 +42,47 @@ public class ViewController {
 	private ProcessDao processDao;
 	
 	
-	
+	@RequestMapping(value = "/appraise_score_view", method = RequestMethod.GET)
+	public String dispApprScoreView(@RequestParam(value="pageNum", defaultValue="1") Integer pageNum,
+			@RequestParam(value="member_no") Integer member_no,
+			@RequestParam(value="project_no") Integer project_no,
+			Model model) {
+		Map<String, Integer> map =  new HashMap<String, Integer>();
+		map.put("member_no", member_no);
+		map.put("project_no", project_no);
+		int pageSize = 10;		
+		int pageGroupSize = 5;			
+		int currentPage = pageNum;
+		int startRow = (currentPage - 1) * pageSize;//한 페이지의 시작글 번호
+		int endRow = currentPage * pageSize;//한 페이지의 마지막 글번호
+		
+		int count = this.processDao.count_complete_appraise(map);
+		int number=count-(currentPage-1)*pageSize;//글목록에 표시할 글번호
+		int pageGroupCount = count/(pageSize*pageGroupSize)+( count % (pageSize*pageGroupSize) == 0 ? 0 : 1);
+		int numPageGroup = (int) Math.ceil((double)currentPage/pageGroupSize);
+		
+		map.put("offset1", startRow);
+		map.put("offset2", pageSize);
+		
+		List<RateVo> list = this.processDao.select_complete_appraise(map);
+		
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("startRow", startRow);
+		model.addAttribute("endRow", endRow);
+		model.addAttribute("count", count);
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("number", number);
+		model.addAttribute("pageGroupSize", pageGroupSize);
+		model.addAttribute("numPageGroup", numPageGroup);
+		model.addAttribute("pageGroupCount", pageGroupCount);
+		model.addAttribute("list",list);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("project_no", project_no);
+		model.addAttribute("member_no", member_no);
+	        return "appraise.score.list";
+	    }
 	 
-	@RequestMapping(value = "//modify_appraise_member", method = RequestMethod.POST)
+	@RequestMapping(value = "/modify_appraise_member", method = RequestMethod.POST)
     public String modifyAppraiseMember(RateVo rate_vo, 
     		@RequestParam(value="appraise_content") String appraise_content,
     		@RequestParam(value="project_no") String project_no) {
@@ -93,8 +131,8 @@ public class ViewController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String user_no = this.memberDao.select_user_no(auth.getName());
 		int user_no_i = Integer.parseInt(user_no);
-		int pageSize = 2;		
-		int pageGroupSize = 2;			
+		int pageSize = 10;		
+		int pageGroupSize = 5;			
 		int currentPage = pageNum;
 		int startRow = (currentPage - 1) * pageSize;//한 페이지의 시작글 번호
 		int endRow = currentPage * pageSize;//한 페이지의 마지막 글번호
@@ -203,6 +241,7 @@ public class ViewController {
 		project.setProject_start_date(mTime);
 		project_history.setProject_end_date("1111-11-11");
 		project.setProject_end_date("1111-11-11");
+		
 	
 		this.projectDao.insert_project(project);
 		
@@ -254,8 +293,8 @@ public class ViewController {
 	public String dispProjectMemberList(@RequestParam(value="pageNum", defaultValue="1") Integer pageNum,
 	    @RequestParam(value="project_no", defaultValue="1") Integer project_no, Model model) {
 		String project_no_s = Integer.toString(project_no);
-		int pageSize = 2;		
-		int pageGroupSize = 2;			
+		int pageSize = 10;		
+		int pageGroupSize = 5;			
 		int currentPage = pageNum;
 		int startRow = (currentPage - 1) * pageSize;//한 페이지의 시작글 번호
 		int endRow = currentPage * pageSize;//한 페이지의 마지막 글번호
@@ -310,8 +349,8 @@ public class ViewController {
 		String user_no_s = this.memberDao.select_user_no(auth.getName());		
 		int user_no = Integer.parseInt(user_no_s);
 		
-		int pageSize = 2;		
-		int pageGroupSize = 2;			
+		int pageSize = 10;		
+		int pageGroupSize = 5;			
 		int currentPage = pageNum;
 		int startRow = (currentPage - 1) * pageSize;//한 페이지의 시작글 번호
 		int endRow = currentPage * pageSize;//한 페이지의 마지막 글번호
@@ -343,8 +382,8 @@ public class ViewController {
 	@PreAuthorize("hasRole('ROLE_PM')")
 	@RequestMapping(value = "/enabled_project_list", method = RequestMethod.GET)
     public String dispApprovalList(@RequestParam(value="pageNum", defaultValue="1") Integer pageNum, Model model) {
-		int pageSize = 2;		
-		int pageGroupSize = 2;			
+		int pageSize = 10;		
+		int pageGroupSize = 5;			
 		int currentPage = pageNum;
 		int startRow = (currentPage - 1) * pageSize;//한 페이지의 시작글 번호
 		int endRow = currentPage * pageSize;//한 페이지의 마지막 글번호

@@ -19,7 +19,7 @@
      <http auto-config="true" use-expressions="true" access-denied-page="/denied">
 
      <form-login
-     login-page="/signin"
+     login-page="/"
      username-parameter="user_id"
      password-parameter="password"
      authentication-success-handler-ref="signinSuccessHandler"
@@ -30,7 +30,7 @@
 
      <logout
      invalidate-session="true"
-     logout-success-url="/signin"
+     logout-success-url="/"
      logout-url="/signout" />
 
      </http>

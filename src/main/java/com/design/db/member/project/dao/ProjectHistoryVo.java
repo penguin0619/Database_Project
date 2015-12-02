@@ -8,7 +8,13 @@ public class ProjectHistoryVo {
 	private String project_end_date;
 	private String role;
 	private String member_name;
-	
+	private String project_name;
+	public String getProject_name() {
+		return project_name;
+	}
+	public void setProject_name(String project_name) {
+		this.project_name = project_name;
+	}
 	public String getRole() {
 		return role;
 	}

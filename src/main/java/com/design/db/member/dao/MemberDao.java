@@ -67,6 +67,9 @@ public class MemberDao {
 	public List<MemberRoleVo> select_role(){
 		return this.memberMapper.select_role();
 	}
+	public List<MemberVo> select_position_board(Map<String,Integer> map){
+		return this.memberMapper.select_position_board(map);
+	}
 }
 
 

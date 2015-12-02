@@ -19,7 +19,13 @@ public class ProcessDao {
 	public void update_appraise(Map<String,String> map){
 		this.processMapper.update_appraise(map);
 	}
-	
+	public int count_complete_appraise(Map<String,Integer> map){
+		return this.processMapper.count_complete_appraise(map);
+	}
+	public List<RateVo> select_complete_appraise(Map<String,Integer> map){
+		return this.processMapper.select_complete_appraise(map);
+	}
+
 }
 
 
