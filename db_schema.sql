@@ -107,7 +107,7 @@ CREATE TABLE approval
 	approval_count     VARCHAR(2)  NOT NULL ,
 	approval_detail    TEXT 	   NOT NULL ,
     PRIMARY KEY(member_no,project_no),
-    FOREIGN KEY(member_no)  REFERENCES member_history(member_no),
+    FOREIGN KEY(member_no)  REFERENCES member(member_no),
     FOREIGN KEY(project_no)  REFERENCES project_request(project_request_no)
 );
 CREATE TABLE approval_status
@@ -117,7 +117,7 @@ CREATE TABLE approval_status
 	approval_select	   VARCHAR(2)   NOT NULL,	
 	approval_opinion   VARCHAR(255) NOT NULL ,
     PRIMARY KEY(member_no,project_no),
-    FOREIGN KEY(member_no)  REFERENCES member_history(member_no),
+    FOREIGN KEY(member_no)  REFERENCES member(member_no),
     FOREIGN KEY(project_no)  REFERENCES project_request(project_request_no)
 );
 
