@@ -11,8 +11,14 @@ public class ProjectRequestVo {
     private String project_address;
     private String project_address_detail;
     private String project_contents;
-    private String project_status;
-    
+    public String getProject_end_date() {
+		return project_end_date;
+	}
+	public void setProject_end_date(String project_end_date) {
+		this.project_end_date = project_end_date;
+	}
+	private String project_status;
+    private String project_end_date;
 	public Integer getProject_request_no() {
 		return project_request_no;
 	}

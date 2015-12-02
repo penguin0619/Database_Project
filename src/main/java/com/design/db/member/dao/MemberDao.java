@@ -52,12 +52,17 @@ public class MemberDao {
 	public int select_count_project_member(){
 		return this.memberMapper.select_count_project_member();
 	}
-	
+	public int select_count_add_member(String project_no){
+		return this.memberMapper.select_count_add_member(project_no);
+	}
 	public List<MemberVo> select_member_board(Map<String, Integer> map){
 		return this.memberMapper.select_member_board(map);		
 	}
-	public List<MemberVo> select_make_project_board(Map<String, Integer> map){
-		return this.memberMapper.select_make_project_board(map);		
+	public List<MemberVo> select_make_project_board(){
+		return this.memberMapper.select_make_project_board();		
+	}
+	public List<MemberVo> select_add_project_board(String project_no){
+		return this.memberMapper.select_add_project_board(project_no);
 	}
 	public List<MemberRoleVo> select_role(){
 		return this.memberMapper.select_role();

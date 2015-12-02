@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.design.db.member.process.dao.ProcessMapper">
+	<resultMap id="rateMap" type="com.design.db.member.process.dao.RateVo">
+        <result property="member_no"    column="member_no" />
+        <result property="project_no" column="project_no" />
+        <result property="appraiser_code"       column="appraiser_code" />
+        <result property="appraiser_member_no"       column="appraiser_member_no" />
+        <result property="performance_score"       column="performance_score" />
+        <result property="communication_score"       column="communication_score" />
+        <result property="detail"       column="detail" />
+    </resultMap>
+	<insert id="insert_default_rate">
+		INSERT INTO member_rate VALUES(
+			 #{member_no}
+			,#{project_no}
+			,#{appraiser_code}
+			,#{appraiser_member_no}
+			,#{performance_score}
+			,#{communication_score}
+			,#{detail}
+		)
+	</insert>    
+	<select id ="select_appraise" resultMap="rateMap" parameterType="java.util.Map">
+	SELECT * FROM member_rate NATURAL JOIN appraiser NATURAL JOIN member_history NATURAL JOIN project_role NATURAL JOIN member
+	WHERE project_no = ${project_no}
+	AND appraiser_member_no =#{member_no}
+	ORDER BY appraiser_code DESC
+	</select>
+	<update id="end_project_date" parameterType="java.util.Map">
+    	UPDATE project
+		SET project_end_date = #{current_time}
+		WHERE project_no=#{project_no}
+    </update>
+	<update id ="update_appraise" parameterType="java.util.Map">
+	UPDATE member_rate
+	SET performance_score = #{performance_score},
+	communication_score = #{communication_score},
+	detail = #{detail}
+	WHERE member_no = #{member_no} AND
+	project_no = #{project_no} AND
+	appraiser_member_no = #{appraiser_member_no} AND
+	appraiser_code = #{appraiser_code}
+	</update>
+</mapper>

@@ -154,8 +154,8 @@ public class ViewController {
 		project_approval.setApproval_count("0");
 		project_approval.setApproval_detail(opinion);
 		Map<String,String> map =  new HashMap<String, String>();
-		map.put("no", project_request_no );
-		map.put("status", "결재중");
+		map.put("project_no", project_request_no );
+		map.put("status","결재중");
         this.projectDao.update_status(map);
         this.projectDao.insert_approval_request(project_approval);
 		return "redirect:/request_project_list";
@@ -170,26 +170,26 @@ public class ViewController {
         project_approval = this.projectDao.selectOne_approval(project_no);
         int max = Integer.parseInt(project_approval.getApproval_max_num());       
         int checknum = Integer.parseInt(project_approval.getApproval_checknum());
-        int count = Integer.parseInt(project_approval.getApproval_count());
-        String project_no_s = Integer.toString(project_no);
-        if(!(checknum == max)){        
-        	this.projectDao.update_checknum(project_no);
-	        if(select.equals("Y")){       
+        int count = Integer.parseInt(project_approval.getApproval_count());	
+        String project_no_s = Integer.toString(project_no);	
+        if(!(checknum == max)){	
+        	this.projectDao.update_checknum(project_no);	
+	        if(select.equals("Y")){
 	        	this.projectDao.update_count(project_no);
-	        }	        
+	        	count++;
+	        }
 			project_select.setMember_no(user_no);
 			project_select.setProject_no(project_no_s);
 			project_select.setApproval_select(select);
 			project_select.setApproval_opinion(opinion);
 			this.projectDao.insert_approval_select(project_select);
 			checknum++;
-        }
-        
+        }        
         if(checknum == max){
         	float f_checknum = checknum;
         	float f_count = count;
         	Map<String,String> map =  new HashMap<String, String>();
-    		map.put("no", project_no_s);        	
+    		map.put("project_no", project_no_s);        	
         	if((f_checknum)/2.0 <= f_count){        		
         		map.put("status", "승인");
         	}else{

@@ -36,6 +36,8 @@
   <div>${project.project_contents}</div><!-- 크기고정시키고 스크롤 넣을것 -->
   </li>
   </ul>
-  
+  <a href="./history_project_member_list?project_no=${project_no}">참여인원</a>
+  <a href="./history_member_add?project_no=${project_no}">인원추가</a>
+  <a href="./history_project_end?project_no=${project_no}">프로젝트 종료</a>
   </body>
 </html>

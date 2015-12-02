@@ -6,7 +6,21 @@ public class ProjectHistoryVo {
 	private String role_no;
 	private String project_start_date;
 	private String project_end_date;
-	private String project_avg;
+	private String role;
+	private String member_name;
+	
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public String getMember_name() {
+		return member_name;
+	}
+	public void setMember_name(String member_name) {
+		this.member_name = member_name;
+	}
 	public String getMember_no() {
 		return member_no;
 	}
@@ -37,12 +51,7 @@ public class ProjectHistoryVo {
 	public void setProject_end_date(String project_end_date) {
 		this.project_end_date = project_end_date;
 	}
-	public String getProject_avg() {
-		return project_avg;
-	}
-	public void setProject_avg(String project_avg) {
-		this.project_avg = project_avg;
-	}
+	
 	
 	
 }

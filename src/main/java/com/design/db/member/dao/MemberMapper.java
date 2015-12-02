@@ -22,7 +22,9 @@ public interface MemberMapper {
     String select_user_name(String member_no);
     int select_count_member();
     int select_count_project_member();
+    int select_count_add_member(String project_no);
     List<MemberVo> select_member_board(Map<String,Integer> map);
-    List<MemberVo> select_make_project_board(Map<String,Integer> map);
+    List<MemberVo> select_make_project_board();
+    List<MemberVo> select_add_project_board(String project_no);
     List<MemberRoleVo> select_role();
    }

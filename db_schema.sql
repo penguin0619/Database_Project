@@ -29,17 +29,6 @@ CREATE TABLE member_career
 	PRIMARY KEY(member_no,before_company_name),
     FOREIGN KEY(member_no) REFERENCES member(member_No)
 );
-CREATE TABLE message
-(
-	msg_no               INTEGER  NOT NULL AUTO_INCREMENT,
-	msg_title             VARCHAR(100)  NOT NULL,
-	msg_sender           INTEGER  NOT NULL ,
-    msg_receiver	      VARCHAR(50)  NOT NULL ,
-	msg_send_date        DATE  NOT NULL ,
-	msg_details           TEXT  NOT NULL ,
-	PRIMARY KEY (msg_no),
-    FOREIGN KEY (msg_sender) REFERENCES member(member_no)
-);
 CREATE TABLE member_skillset
 (
 	member_no             INTEGER  NOT NULL,	
@@ -67,8 +56,7 @@ CREATE TABLE project
 	project_no    INTEGER  NOT NULL, 
 	project_start_date    DATE  NOT NULL ,
 	project_end_date      DATE NULL,
-	project_details       TEXT  NULL ,
-    PRIMARY KEY (project_no),
+	PRIMARY KEY (project_no),
     FOREIGN KEY (project_no) REFERENCES project_request(project_request_no)
 );
 CREATE TABLE project_role
@@ -84,7 +72,6 @@ CREATE TABLE member_history
     role_no             VARCHAR(3)  NOT NULL ,
 	project_start_date    DATE  NOT NULL ,
 	project_end_date     DATE  NULL ,
-	project_avg         FLOAT  NULL, 
 	PRIMARY KEY(member_no,project_no),
     FOREIGN KEY(member_no) REFERENCES member(member_no),
     FOREIGN KEY(project_no) REFERENCES project(project_no),
@@ -119,7 +106,9 @@ CREATE TABLE approval
 	approval_checknum  VARCHAR(2)  NOT NULL,
 	approval_count     VARCHAR(2)  NOT NULL ,
 	approval_detail    TEXT 	   NOT NULL ,
-    PRIMARY KEY(member_no,project_no)    
+    PRIMARY KEY(member_no,project_no),
+    FOREIGN KEY(member_no)  REFERENCES member_history(member_no),
+    FOREIGN KEY(project_no)  REFERENCES project_request(project_request_no)
 );
 CREATE TABLE approval_status
 (
@@ -127,7 +116,9 @@ CREATE TABLE approval_status
 	project_no         INTEGER      NOT NULL, 
 	approval_select	   VARCHAR(2)   NOT NULL,	
 	approval_opinion   VARCHAR(255) NOT NULL ,
-    PRIMARY KEY(member_no,project_no)    
+    PRIMARY KEY(member_no,project_no),
+    FOREIGN KEY(member_no)  REFERENCES member_history(member_no),
+    FOREIGN KEY(project_no)  REFERENCES project_request(project_request_no)
 );
 
 INSERT INTO positions VALUES(0,'임원');
@@ -147,7 +138,6 @@ INSERT INTO appraiser VALUES(102,'고객평가');
 
 ALTER TABLE member AUTO_INCREMENT=234696;
 ALTER TABLE project_request AUTO_INCREMENT=783473;
-ALTER TABLE message AUTO_INCREMENT=984584;
 INSERT INTO `member` (`member_id`,`member_password`,`member_degree`,`member_name`,`member_cellphone`,`member_pos_code`,`member_personal_id`)
 VALUES('dladnjs1','dladnjs1','박사','임원1','010-1231-3453','0','8302051851812');
 INSERT INTO `member_skillset` (`member_no`,`member_skillset`)VALUES('234696','C#,');

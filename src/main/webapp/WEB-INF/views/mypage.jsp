@@ -38,6 +38,7 @@
 	 <a href="./request_approval_list">결재요청</a>
 	 <a href="./history_project_list">참여프로젝트</a>
 	 <a href="./enabled_project_list">프로젝트처리</a>
+	 <a href="./appraise_member_list">개인평가</a>
 	 <a href="./signout">로그아웃</a>
 </div>
 </div>

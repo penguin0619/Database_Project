@@ -22,7 +22,7 @@
 <script src="<c:url value="/resources/js/add_project_member.js" />"></script> 
 </head>
 <body>
-<form id="form" method="post" action="./add_project_member">
+<form id="form" method="post" action="./history_add_project_member">
  	<!-- 상단 네비게이션 바 -->
 <div class="navbar navbar-inverse navbar-fixed-top">
      
@@ -76,8 +76,7 @@
 				</tbody>
 			</table>
 		</div>
-</div>
-		
+		</div>
 		<div>
 			<button type="button" class="btn btn-default" onclick="form_save('#form');">적용</button>
 		</div>

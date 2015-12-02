@@ -3,6 +3,8 @@ package com.design.db.member.project.dao;
 public class ProjectVo {
 	private String project_no;
 	private String project_start_date;
+	private String project_end_date;
+	
 	public String getProject_no() {
 		return project_no;
 	}
@@ -21,12 +23,6 @@ public class ProjectVo {
 	public void setProject_end_date(String project_end_date) {
 		this.project_end_date = project_end_date;
 	}
-	public String getProject_details() {
-		return project_details;
-	}
-	public void setProject_details(String project_details) {
-		this.project_details = project_details;
-	}
-	private String project_end_date;
-	private String project_details;
+
+	
 }

@@ -7,6 +7,7 @@ public class ProjectApprovalVo {
 	private String approval_checknum;
 	private String approval_count;
 	private String approval_detail;
+	
 	public String getMember_no() {
 		return member_no;
 	}
@@ -43,5 +44,4 @@ public class ProjectApprovalVo {
 	public void setApproval_detail(String approval_detail) {
 		this.approval_detail = approval_detail;
 	}
-	
 }
